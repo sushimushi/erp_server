@@ -15,3 +15,4 @@ export * from './payment.model';
 export * from './order-update.model';
 export * from './receipt.model';
 export * from './variant.model';
+export * from './order-ticket-group.model';
