@@ -1,0 +1,27 @@
+import {Model, model, property} from '@loopback/repository';
+
+@model()
+export class ProductDiscount extends Model {
+  @property({
+    type: 'string',
+    id: true,
+  })
+  productId?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  discountId: string;
+
+
+  constructor(data?: Partial<ProductDiscount>) {
+    super(data);
+  }
+}
+
+export interface ProductDiscountRelations {
+  // describe navigational properties here
+}
+
+export type ProductDiscountWithRelations = ProductDiscount & ProductDiscountRelations;
