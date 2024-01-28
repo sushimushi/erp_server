@@ -2,7 +2,7 @@ export * from './account.model';
 export * from './address.model';
 export * from './crm.model';
 export * from './device.model';
-export * from './paymentGateway.model';
+export * from './payment-gateway.model';
 export * from './product.model';
 export * from './register.model';
 export * from './user.model';

@@ -1,7 +1,7 @@
-import {Model, model, property} from '@loopback/repository';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class User extends Model {
+export class User extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -32,7 +32,6 @@ export class User extends Model {
     required: true,
   })
   registerId: string;
-
 
   constructor(data?: Partial<User>) {
     super(data);

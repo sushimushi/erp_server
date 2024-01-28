@@ -1,7 +1,18 @@
-import {Model, model, property} from '@loopback/repository';
+import {
+  Entity,
+  belongsTo,
+  hasMany,
+  model,
+  property,
+} from '@loopback/repository';
+import {Address} from './address.model';
+import {Crm} from './crm.model';
+import {Device} from './device.model';
+import {Register} from './register.model';
+import {User} from './user.model';
 
 @model()
-export class Account extends Model {
+export class Account extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -26,13 +37,6 @@ export class Account extends Model {
     required: true,
   })
   businessType: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  userId: string;
-
   @property({
     type: 'string',
     required: true,
@@ -62,12 +66,20 @@ export class Account extends Model {
   })
   option?: object;
 
-  @property({
-    type: 'string',
-    required: true,
-  })
+  @belongsTo(() => Address)
   businessAddressId: string;
 
+  @belongsTo(() => User, {name: 'accountUser'})
+  userId: string;
+
+  @belongsTo(() => Register, {name: 'accountRegister'})
+  registerId: string;
+
+  @hasMany(() => Device)
+  accountDevices: Device[];
+
+  @hasMany(() => Crm, {keyTo: 'crmId'})
+  crms: Crm[];
 
   constructor(data?: Partial<Account>) {
     super(data);

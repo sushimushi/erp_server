@@ -1,7 +1,7 @@
-import {Model, model, property} from '@loopback/repository';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class Address extends Model {
+export class Address extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -49,7 +49,6 @@ export class Address extends Model {
     required: true,
   })
   location: string;
-
 
   constructor(data?: Partial<Address>) {
     super(data);
