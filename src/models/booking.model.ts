@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Receipt} from './receipt.model';
 
 @model()
 export class Booking extends Model {
@@ -8,13 +9,6 @@ export class Booking extends Model {
     generated: true,
   })
   bookingId?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  receiptId: string;
-
   @property({
     type: 'object',
   })
@@ -43,6 +37,8 @@ export class Booking extends Model {
   })
   updatedById: string;
 
+  @belongsTo(() => Receipt)
+  receiptId: string;
 
   constructor(data?: Partial<Booking>) {
     super(data);

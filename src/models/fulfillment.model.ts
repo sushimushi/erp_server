@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Receipt} from './receipt.model';
 
 @model()
 export class Fulfillment extends Model {
@@ -8,13 +9,6 @@ export class Fulfillment extends Model {
     generated: true,
   })
   fulfillmentId?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  receiptId: string;
-
   @property({
     type: 'date',
     required: true,
@@ -33,6 +27,8 @@ export class Fulfillment extends Model {
   })
   isPaymentReceived: boolean;
 
+  @belongsTo(() => Receipt)
+  receiptId: string;
 
   constructor(data?: Partial<Fulfillment>) {
     super(data);

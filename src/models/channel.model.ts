@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Order} from './order.model';
 
 @model()
 export class Channel extends Model {
@@ -68,6 +69,8 @@ export class Channel extends Model {
   })
   cancellationReasons?: object;
 
+  @hasMany(() => Order)
+  orders: Order[];
 
   constructor(data?: Partial<Channel>) {
     super(data);

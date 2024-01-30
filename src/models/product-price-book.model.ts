@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Account} from './account.model';
 
 @model()
 export class ProductPriceBook extends Model {
@@ -8,13 +9,6 @@ export class ProductPriceBook extends Model {
     generated: true,
   })
   priceBookId?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  accountId: string;
-
   @property({
     type: 'string',
     required: true,
@@ -65,6 +59,14 @@ export class ProductPriceBook extends Model {
     type: 'object',
   })
   addons?: object;
+
+  @property({
+    type: 'string',
+  })
+  productId?: string;
+
+  @belongsTo(() => Account)
+  accountId: string;
 
   constructor(data?: Partial<ProductPriceBook>) {
     super(data);

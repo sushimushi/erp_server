@@ -1,19 +1,16 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Product} from './product.model';
 
 @model()
 export class ProductCategory extends Model {
-  @property({
-    type: 'string',
-    id: true,
-  })
-  productId?: string;
-
   @property({
     type: 'string',
     required: true,
   })
   categoryId: string;
 
+  @belongsTo(() => Product)
+  productId: string;
 
   constructor(data?: Partial<ProductCategory>) {
     super(data);

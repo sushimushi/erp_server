@@ -1,4 +1,6 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Variant} from './variant.model';
+import {VariantGroupVariant} from './variant-group-variant.model';
 
 @model()
 export class VariantGroup extends Model {
@@ -27,6 +29,9 @@ export class VariantGroup extends Model {
     required: true,
   })
   order: number;
+
+  @hasMany(() => Variant, {through: {model: () => VariantGroupVariant}})
+  variants: Variant[];
 
   constructor(data?: Partial<VariantGroup>) {
     super(data);

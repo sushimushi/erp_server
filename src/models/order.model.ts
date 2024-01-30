@@ -10,6 +10,8 @@ import {Booking} from './booking.model';
 import {Fulfillment} from './fulfillment.model';
 import {PushNotification} from './push-notification.model';
 import {WebhookTable} from './webhook-table.model';
+import {Product} from './product.model';
+import {ProductOrder} from './product-order.model';
 
 @model()
 export class Order extends Model {
@@ -115,6 +117,20 @@ export class Order extends Model {
 
   @hasMany(() => WebhookTable)
   webhookTables: WebhookTable[];
+
+  @property({
+    type: 'string',
+  })
+  channelId?: string;
+
+  @hasMany(() => TaxGroup, {through: {model: () => OrderTaxGroup}})
+  taxGroups: TaxGroup[];
+
+  @hasMany(() => Product, {through: {model: () => ProductOrder}})
+  products: Product[];
+
+  @hasMany(() => WebhookTable)
+  orderWebhookTable: WebhookTable[];
 
   constructor(data?: Partial<Order>) {
     super(data);

@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Account} from './account.model';
 
 @model()
 export class PermissionPreferences extends Model {
@@ -8,13 +9,6 @@ export class PermissionPreferences extends Model {
     generated: true,
   })
   permissionPreferenceId?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  accountId: string;
-
   @property({
     type: 'boolean',
     required: true,
@@ -33,6 +27,8 @@ export class PermissionPreferences extends Model {
   })
   isShiftSummaryHiddenOnLock: boolean;
 
+  @belongsTo(() => Account)
+  accountId: string;
 
   constructor(data?: Partial<PermissionPreferences>) {
     super(data);

@@ -1,7 +1,7 @@
 import {inject, Getter} from '@loopback/core';
 import {DefaultCrudRepository, repository, HasManyRepositoryFactory, HasManyThroughRepositoryFactory, HasOneRepositoryFactory} from '@loopback/repository';
 import {PostgresDataSource} from '../datasources';
-import {Order, OrderRelations, OrderItem, TaxGroup, OrderTaxGroup, Discount, OrderDiscount, Payment, Refund, Booking, Fulfillment, PushNotification, WebhookTable} from '../models';
+import {Order, OrderRelations, OrderItem, TaxGroup, OrderTaxGroup, Discount, OrderDiscount, Payment, Refund, Booking, Fulfillment, PushNotification, WebhookTable, Product, ProductOrder} from '../models';
 import {OrderItemRepository} from './order-item.repository';
 import {OrderTaxGroupRepository} from './order-tax-group.repository';
 import {TaxGroupRepository} from './tax-group.repository';
@@ -13,6 +13,8 @@ import {BookingRepository} from './booking.repository';
 import {FulfillmentRepository} from './fulfillment.repository';
 import {PushNotificationRepository} from './push-notification.repository';
 import {WebhookTableRepository} from './webhook-table.repository';
+import {ProductOrderRepository} from './product-order.repository';
+import {ProductRepository} from './product.repository';
 
 export class OrderRepository extends DefaultCrudRepository<
   Order,
@@ -44,10 +46,28 @@ export class OrderRepository extends DefaultCrudRepository<
 
   public readonly webhookTables: HasManyRepositoryFactory<WebhookTable, typeof Order.prototype.orderId>;
 
+  public readonly taxGroups: HasManyThroughRepositoryFactory<TaxGroup, typeof TaxGroup.prototype.taxGroupId,
+          OrderTaxGroup,
+          typeof Order.prototype.orderId
+        >;
+
+  public readonly products: HasManyThroughRepositoryFactory<Product, typeof Product.prototype.productId,
+          ProductOrder,
+          typeof Order.prototype.orderId
+        >;
+
+  public readonly orderWebhookTable: HasManyRepositoryFactory<WebhookTable, typeof Order.prototype.orderId>;
+
   constructor(
-    @inject('datasources.postgres') dataSource: PostgresDataSource, @repository.getter('OrderItemRepository') protected orderItemRepositoryGetter: Getter<OrderItemRepository>, @repository.getter('OrderTaxGroupRepository') protected orderTaxGroupRepositoryGetter: Getter<OrderTaxGroupRepository>, @repository.getter('TaxGroupRepository') protected taxGroupRepositoryGetter: Getter<TaxGroupRepository>, @repository.getter('OrderDiscountRepository') protected orderDiscountRepositoryGetter: Getter<OrderDiscountRepository>, @repository.getter('DiscountRepository') protected discountRepositoryGetter: Getter<DiscountRepository>, @repository.getter('PaymentRepository') protected paymentRepositoryGetter: Getter<PaymentRepository>, @repository.getter('RefundRepository') protected refundRepositoryGetter: Getter<RefundRepository>, @repository.getter('BookingRepository') protected bookingRepositoryGetter: Getter<BookingRepository>, @repository.getter('FulfillmentRepository') protected fulfillmentRepositoryGetter: Getter<FulfillmentRepository>, @repository.getter('PushNotificationRepository') protected pushNotificationRepositoryGetter: Getter<PushNotificationRepository>, @repository.getter('WebhookTableRepository') protected webhookTableRepositoryGetter: Getter<WebhookTableRepository>,
+    @inject('datasources.postgres') dataSource: PostgresDataSource, @repository.getter('OrderItemRepository') protected orderItemRepositoryGetter: Getter<OrderItemRepository>, @repository.getter('OrderTaxGroupRepository') protected orderTaxGroupRepositoryGetter: Getter<OrderTaxGroupRepository>, @repository.getter('TaxGroupRepository') protected taxGroupRepositoryGetter: Getter<TaxGroupRepository>, @repository.getter('OrderDiscountRepository') protected orderDiscountRepositoryGetter: Getter<OrderDiscountRepository>, @repository.getter('DiscountRepository') protected discountRepositoryGetter: Getter<DiscountRepository>, @repository.getter('PaymentRepository') protected paymentRepositoryGetter: Getter<PaymentRepository>, @repository.getter('RefundRepository') protected refundRepositoryGetter: Getter<RefundRepository>, @repository.getter('BookingRepository') protected bookingRepositoryGetter: Getter<BookingRepository>, @repository.getter('FulfillmentRepository') protected fulfillmentRepositoryGetter: Getter<FulfillmentRepository>, @repository.getter('PushNotificationRepository') protected pushNotificationRepositoryGetter: Getter<PushNotificationRepository>, @repository.getter('WebhookTableRepository') protected webhookTableRepositoryGetter: Getter<WebhookTableRepository>, @repository.getter('ProductOrderRepository') protected productOrderRepositoryGetter: Getter<ProductOrderRepository>, @repository.getter('ProductRepository') protected productRepositoryGetter: Getter<ProductRepository>,
   ) {
     super(Order, dataSource);
+    this.orderWebhookTable = this.createHasManyRepositoryFactoryFor('orderWebhookTable', webhookTableRepositoryGetter,);
+    this.registerInclusionResolver('orderWebhookTable', this.orderWebhookTable.inclusionResolver);
+    this.products = this.createHasManyThroughRepositoryFactoryFor('products', productRepositoryGetter, productOrderRepositoryGetter,);
+    this.registerInclusionResolver('products', this.products.inclusionResolver);
+    this.taxGroups = this.createHasManyThroughRepositoryFactoryFor('taxGroups', taxGroupRepositoryGetter, orderTaxGroupRepositoryGetter,);
+    this.registerInclusionResolver('taxGroups', this.taxGroups.inclusionResolver);
     this.webhookTables = this.createHasManyRepositoryFactoryFor('webhookTables', webhookTableRepositoryGetter,);
     this.registerInclusionResolver('webhookTables', this.webhookTables.inclusionResolver);
     this.pushNotifications = this.createHasManyRepositoryFactoryFor('pushNotifications', pushNotificationRepositoryGetter,);

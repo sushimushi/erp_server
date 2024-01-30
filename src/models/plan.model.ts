@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Account} from './account.model';
 
 @model()
 export class Plan extends Model {
@@ -8,13 +9,6 @@ export class Plan extends Model {
     generated: true,
   })
   planId?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  accountId: string;
-
   @property({
     type: 'boolean',
     required: true,
@@ -27,6 +21,8 @@ export class Plan extends Model {
   })
   isWaiterAllowed: boolean;
 
+  @belongsTo(() => Account)
+  accountId: string;
 
   constructor(data?: Partial<Plan>) {
     super(data);

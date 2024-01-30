@@ -1,4 +1,6 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {DiscountRule} from './discount-rule.model';
+import {DiscountRuleDiscount} from './discount-rule-discount.model';
 
 @model()
 export class Discount extends Model {
@@ -32,6 +34,8 @@ export class Discount extends Model {
   })
   total: number;
 
+  @hasMany(() => DiscountRule, {through: {model: () => DiscountRuleDiscount}})
+  discountRuleDiscount: DiscountRule[];
 
   constructor(data?: Partial<Discount>) {
     super(data);

@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Order} from './order.model';
 
 @model()
 export class Refund extends Model {
@@ -85,6 +86,8 @@ export class Refund extends Model {
   })
   updatedBy: string;
 
+  @belongsTo(() => Order)
+  orderId: string;
 
   constructor(data?: Partial<Refund>) {
     super(data);

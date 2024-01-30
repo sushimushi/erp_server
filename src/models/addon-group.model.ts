@@ -1,4 +1,6 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Addon} from './addon.model';
+import {AddonGroupAddon} from './addon-group-addon.model';
 
 @model()
 export class AddonGroup extends Model {
@@ -37,6 +39,9 @@ export class AddonGroup extends Model {
     type: 'number',
   })
   maxSelectable?: number;
+
+  @hasMany(() => Addon, {through: {model: () => AddonGroupAddon}})
+  addonGroupAddon: Addon[];
 
   constructor(data?: Partial<AddonGroup>) {
     super(data);

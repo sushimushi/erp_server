@@ -1,4 +1,6 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Tax} from './tax.model';
+import {TaxGroupTax} from './tax-group-tax.model';
 
 @model({settings: {strict: false}})
 export class TaxGroup extends Model {
@@ -34,6 +36,8 @@ export class TaxGroup extends Model {
   })
   total: number;
 
+  @hasMany(() => Tax, {through: {model: () => TaxGroupTax}})
+  taxes: Tax[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

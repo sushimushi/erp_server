@@ -54,3 +54,7 @@ export * from './variant-group-variant.repository';
 export * from './variant-group.repository';
 export * from './variant.repository';
 export * from './webhook-table.repository';
+export * from './product-custom-payment.repository';
+export * from './discount-rule-discount.repository';
+export * from './additional-details-order.repository';
+export * from './product-additional-details.repository';

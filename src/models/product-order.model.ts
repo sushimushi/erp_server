@@ -14,6 +14,10 @@ export class ProductOrder extends Model {
   })
   orderId: string;
 
+  @property({
+    type: 'string',
+  })
+  orderItemId?: string;
 
   constructor(data?: Partial<ProductOrder>) {
     super(data);

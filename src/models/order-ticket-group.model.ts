@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Category} from './category.model';
 
 @model()
 export class OrderTicketGroup extends Model {
@@ -24,6 +25,9 @@ export class OrderTicketGroup extends Model {
     type: 'string',
   })
   accountId?: string;
+
+  @belongsTo(() => Category)
+  categoryId: string;
 
   constructor(data?: Partial<OrderTicketGroup>) {
     super(data);

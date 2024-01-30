@@ -1,4 +1,6 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Product} from './product.model';
+import {ProductCustomPayment} from './product-custom-payment.model';
 
 @model()
 export class CustomPayment extends Model {
@@ -21,6 +23,8 @@ export class CustomPayment extends Model {
   })
   description: string;
 
+  @hasMany(() => Product, {through: {model: () => ProductCustomPayment}})
+  products: Product[];
 
   constructor(data?: Partial<CustomPayment>) {
     super(data);

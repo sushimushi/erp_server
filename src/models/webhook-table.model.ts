@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Order} from './order.model';
 
 @model()
 export class WebhookTable extends Model {
@@ -53,6 +54,9 @@ export class WebhookTable extends Model {
     type: 'string',
   })
   orderId?: string;
+
+  @hasMany(() => Order, {keyTo: 'orderId'})
+  orders: Order[];
 
   constructor(data?: Partial<WebhookTable>) {
     super(data);

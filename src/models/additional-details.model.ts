@@ -1,4 +1,6 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Order} from './order.model';
+import {AdditionalDetailsOrder} from './additional-details-order.model';
 
 @model()
 export class AdditionalDetails extends Model {
@@ -33,6 +35,14 @@ export class AdditionalDetails extends Model {
   })
   fieldType?: string[];
 
+  @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
+  additionalDetailsOrder: Order[];
+
+  @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
+  orders: Order[];
+
+  @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
+  ordersAdditionalDetails: Order[];
 
   constructor(data?: Partial<AdditionalDetails>) {
     super(data);

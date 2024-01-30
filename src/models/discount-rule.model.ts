@@ -1,4 +1,8 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Register} from './register.model';
+import {DiscountRuleRegister} from './discount-rule-register.model';
+import {Discount} from './discount.model';
+import {DiscountRuleDiscount} from './discount-rule-discount.model';
 
 @model()
 export class DiscountRule extends Model {
@@ -55,6 +59,11 @@ export class DiscountRule extends Model {
   })
   isAutomaticallyApplied: boolean;
 
+  @hasMany(() => Register, {through: {model: () => DiscountRuleRegister}})
+  registers: Register[];
+
+  @hasMany(() => Discount, {through: {model: () => DiscountRuleDiscount}})
+  discounts: Discount[];
 
   constructor(data?: Partial<DiscountRule>) {
     super(data);

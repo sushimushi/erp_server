@@ -1,5 +1,7 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Model, model, property, hasMany, belongsTo} from '@loopback/repository';
 import {Refund} from './refund.model';
+import {Booking} from './booking.model';
+import {Fulfillment} from './fulfillment.model';
 
 @model()
 export class Receipt extends Model {
@@ -136,6 +138,12 @@ export class Receipt extends Model {
 
   @hasMany(() => Refund)
   refunds: Refund[];
+
+  @belongsTo(() => Booking)
+  bookingId: string;
+
+  @belongsTo(() => Fulfillment)
+  fulfillmentId: string;
 
   constructor(data?: Partial<Receipt>) {
     super(data);

@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Order} from './order.model';
 
 @model()
 export class PushNotification extends Model {
@@ -8,13 +9,6 @@ export class PushNotification extends Model {
     generated: true,
   })
   notificationId?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  orderId: string;
-
   @property({
     type: 'string',
     required: true,
@@ -33,6 +27,8 @@ export class PushNotification extends Model {
   })
   message: string;
 
+  @belongsTo(() => Order)
+  orderId: string;
 
   constructor(data?: Partial<PushNotification>) {
     super(data);

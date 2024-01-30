@@ -53,3 +53,7 @@ export * from './tax-group-tax.model';
 export * from './variant-group-variant.model';
 export * from './addon-group-addon.model';
 export * from './discount-rule-register.model';
+export * from './product-custom-payment.model';
+export * from './discount-rule-discount.model';
+export * from './additional-details-order.model';
+export * from './product-additional-details.model';

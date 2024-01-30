@@ -1,20 +1,9 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany, belongsTo} from '@loopback/repository';
+import {Variant} from './variant.model';
+import {Product} from './product.model';
 
 @model()
 export class ProductVariant extends Model {
-  @property({
-    type: 'string',
-    id: true,
-    generated: true,
-  })
-  variantId?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  productId: string;
-
   @property({
     type: 'string',
     required: true,
@@ -32,6 +21,14 @@ export class ProductVariant extends Model {
   })
   sku: string;
 
+  @hasMany(() => Variant, {keyTo: 'variantId'})
+  variants: Variant[];
+
+  @belongsTo(() => Product)
+  productId: string;
+
+  @belongsTo(() => Variant)
+  variantId: string;
 
   constructor(data?: Partial<ProductVariant>) {
     super(data);
