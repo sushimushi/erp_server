@@ -20,6 +20,10 @@ export class OrderTicketGroup extends Model {
   })
   description?: string;
 
+  @property({
+    type: 'string',
+  })
+  accountId?: string;
 
   constructor(data?: Partial<OrderTicketGroup>) {
     super(data);

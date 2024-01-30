@@ -49,6 +49,10 @@ export class WebhookTable extends Model {
   })
   appAdditionalDetails?: object;
 
+  @property({
+    type: 'string',
+  })
+  orderId?: string;
 
   constructor(data?: Partial<WebhookTable>) {
     super(data);

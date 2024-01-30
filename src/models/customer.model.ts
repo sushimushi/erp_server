@@ -50,6 +50,10 @@ export class Customer extends Model {
   })
   tags?: string[];
 
+  @property({
+    type: 'string',
+  })
+  billingAddressId?: string;
 
   constructor(data?: Partial<Customer>) {
     super(data);

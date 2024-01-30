@@ -1,4 +1,5 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {Refund} from './refund.model';
 
 @model()
 export class Receipt extends Model {
@@ -127,6 +128,14 @@ export class Receipt extends Model {
     type: 'object',
   })
   RedemptionDetails?: object;
+
+  @property({
+    type: 'string',
+  })
+  updatedBy?: string;
+
+  @hasMany(() => Refund)
+  refunds: Refund[];
 
   constructor(data?: Partial<Receipt>) {
     super(data);

@@ -1,4 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Order} from './order.model';
+import {OrderUpdate} from './order-update.model';
+import {Receipt} from './receipt.model';
 
 @model()
 export class User extends Entity {
@@ -32,6 +35,18 @@ export class User extends Entity {
     required: true,
   })
   registerId: string;
+
+  @hasMany(() => Order, {keyTo: 'cancelledBy'})
+  orders: Order[];
+
+  @hasMany(() => Order, {keyTo: 'cancelledBy'})
+  cancelledBy: Order[];
+
+  @hasMany(() => OrderUpdate, {keyTo: 'updatedBy'})
+  orderUpdates: OrderUpdate[];
+
+  @hasMany(() => Receipt, {keyTo: 'updatedBy'})
+  userReceipt: Receipt[];
 
   constructor(data?: Partial<User>) {
     super(data);

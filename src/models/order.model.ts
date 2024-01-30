@@ -1,4 +1,15 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany, hasOne} from '@loopback/repository';
+import {OrderItem} from './order-item.model';
+import {TaxGroup} from './tax-group.model';
+import {OrderTaxGroup} from './order-tax-group.model';
+import {Discount} from './discount.model';
+import {OrderDiscount} from './order-discount.model';
+import {Payment} from './payment.model';
+import {Refund} from './refund.model';
+import {Booking} from './booking.model';
+import {Fulfillment} from './fulfillment.model';
+import {PushNotification} from './push-notification.model';
+import {WebhookTable} from './webhook-table.model';
 
 @model()
 export class Order extends Model {
@@ -78,6 +89,32 @@ export class Order extends Model {
   })
   cancellationReason?: string;
 
+  @hasMany(() => OrderItem)
+  orderItems: OrderItem[];
+
+  @hasMany(() => TaxGroup, {through: {model: () => OrderTaxGroup}})
+  orderTaxGroup: TaxGroup[];
+
+  @hasMany(() => Discount, {through: {model: () => OrderDiscount}})
+  orderDiscount: Discount[];
+
+  @hasMany(() => Payment, {keyTo: 'transactedBy'})
+  orderPayment: Payment[];
+
+  @hasMany(() => Refund, {keyTo: 'updatedBy'})
+  refunds: Refund[];
+
+  @hasOne(() => Booking, {keyTo: 'receiptId'})
+  booking: Booking;
+
+  @hasOne(() => Fulfillment, {keyTo: 'receiptId'})
+  fulfillment: Fulfillment;
+
+  @hasMany(() => PushNotification)
+  pushNotifications: PushNotification[];
+
+  @hasMany(() => WebhookTable)
+  webhookTables: WebhookTable[];
 
   constructor(data?: Partial<Order>) {
     super(data);

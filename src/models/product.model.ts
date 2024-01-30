@@ -1,4 +1,8 @@
-import {Model, model, property} from '@loopback/repository';
+import {Model, model, property, hasMany} from '@loopback/repository';
+import {TaxGroup} from './tax-group.model';
+import {ProductTaxGroup} from './product-tax-group.model';
+import {Category} from './category.model';
+import {ProductCategory} from './product-category.model';
 
 @model()
 export class Product extends Model {
@@ -60,6 +64,12 @@ export class Product extends Model {
     type: 'object',
   })
   comboDetails: object;
+
+  @hasMany(() => TaxGroup, {through: {model: () => ProductTaxGroup}})
+  taxGroups: TaxGroup[];
+
+  @hasMany(() => Category, {through: {model: () => ProductCategory}})
+  categories: Category[];
 
   constructor(data?: Partial<Product>) {
     super(data);
