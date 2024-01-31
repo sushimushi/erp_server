@@ -55,7 +55,9 @@
     "@loopback/rest": "^13.1.5",
     "@loopback/rest-explorer": "^6.1.5",
     "@loopback/service-proxy": "^6.1.5",
+    "loopback-component-passport": "^3.12.0",
     "loopback-connector-postgresql": "^5.5.2",
+    "passport": "^0.7.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
