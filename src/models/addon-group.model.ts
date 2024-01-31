@@ -48,8 +48,8 @@ export class AddonGroup extends Entity {
   }
 }
 
-export interface AddonGroupIdsRelations {
+export interface AddonGroupRelations {
   // describe navigational properties here
 }
 
-export type AddonGroupIdsWithRelations = AddonGroup & AddonGroupIdsRelations;
+export type AddonGroupWithRelations = AddonGroup & AddonGroupRelations;

@@ -14,6 +14,12 @@ export class ProductCustomPayment extends Entity {
   })
   customPaymentId: string;
 
+  @property({
+    type: 'string',
+    id: true,
+  })
+  id: string;
+
 
   constructor(data?: Partial<ProductCustomPayment>) {
     super(data);
