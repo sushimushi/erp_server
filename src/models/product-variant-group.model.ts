@@ -1,8 +1,8 @@
-import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Product} from './product.model';
 
 @model()
-export class ProductVariantGroup extends Model {
+export class ProductVariantGroup extends Entity {
   @property({
     type: 'string',
     required: true,

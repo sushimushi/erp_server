@@ -1,8 +1,8 @@
-import {Model, model, property, belongsTo} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Order} from './order.model';
 
 @model()
-export class PushNotification extends Model {
+export class PushNotification extends Entity {
   @property({
     type: 'string',
     id: true,

@@ -1,9 +1,9 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Variant} from './variant.model';
 import {VariantGroupVariant} from './variant-group-variant.model';
 
 @model()
-export class VariantGroup extends Model {
+export class VariantGroup extends Entity {
   @property({
     type: 'string',
     id: true,

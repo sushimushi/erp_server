@@ -1,8 +1,8 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Order} from './order.model';
 
 @model()
-export class WebhookTable extends Model {
+export class WebhookTable extends Entity {
   @property({
     type: 'string',
     id: true,

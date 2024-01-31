@@ -1,7 +1,7 @@
-import {Model, model, property} from '@loopback/repository';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class ProductAdditionalDetails extends Model {
+export class ProductAdditionalDetails extends Entity {
   @property({
     type: 'string',
     required: true,

@@ -1,8 +1,8 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Order} from './order.model';
 
 @model()
-export class Channel extends Model {
+export class Channel extends Entity {
   @property({
     type: 'string',
     id: true,

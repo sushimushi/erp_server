@@ -1,4 +1,4 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {TaxGroup} from './tax-group.model';
 import {ProductTaxGroup} from './product-tax-group.model';
 import {Category} from './category.model';
@@ -18,7 +18,7 @@ import {AdditionalDetails} from './additional-details.model';
 import {ProductAdditionalDetails} from './product-additional-details.model';
 
 @model()
-export class Product extends Model {
+export class Product extends Entity {
   @property({
     type: 'string',
     id: true,

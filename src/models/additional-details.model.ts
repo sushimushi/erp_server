@@ -1,9 +1,9 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Order} from './order.model';
 import {AdditionalDetailsOrder} from './additional-details-order.model';
 
 @model()
-export class AdditionalDetails extends Model {
+export class AdditionalDetails extends Entity {
   @property({
     type: 'string',
     id: true,

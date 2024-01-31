@@ -1,4 +1,4 @@
-import {Model, model, property, hasMany, hasOne} from '@loopback/repository';
+import {Entity, model, property, hasMany, hasOne} from '@loopback/repository';
 import {OrderItem} from './order-item.model';
 import {TaxGroup} from './tax-group.model';
 import {OrderTaxGroup} from './order-tax-group.model';
@@ -14,7 +14,7 @@ import {Product} from './product.model';
 import {ProductOrder} from './product-order.model';
 
 @model()
-export class Order extends Model {
+export class Order extends Entity {
   @property({
     type: 'string',
     id: true,

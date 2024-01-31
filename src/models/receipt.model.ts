@@ -1,10 +1,10 @@
-import {Model, model, property, hasMany, belongsTo} from '@loopback/repository';
+import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
 import {Refund} from './refund.model';
 import {Booking} from './booking.model';
 import {Fulfillment} from './fulfillment.model';
 
 @model()
-export class Receipt extends Model {
+export class Receipt extends Entity {
   @property({
     type: 'string',
     id: true,

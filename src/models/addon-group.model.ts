@@ -1,9 +1,9 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Addon} from './addon.model';
 import {AddonGroupAddon} from './addon-group-addon.model';
 
 @model()
-export class AddonGroup extends Model {
+export class AddonGroup extends Entity {
   @property({
     type: 'string',
     id: true,

@@ -1,9 +1,9 @@
-import {Model, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {DiscountRule} from './discount-rule.model';
 import {DiscountRuleDiscount} from './discount-rule-discount.model';
 
 @model()
-export class Discount extends Model {
+export class Discount extends Entity {
   @property({
     type: 'string',
     id: true,

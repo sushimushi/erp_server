@@ -1,7 +1,7 @@
-import {Model, model, property} from '@loopback/repository';
+import {Entity, model, property} from '@loopback/repository';
 
 @model({settings: {strict: false}})
-export class AdditionalDetailsOrder extends Model {
+export class AdditionalDetailsOrder extends Entity {
   @property({
     type: 'string',
     required: true,
@@ -36,4 +36,5 @@ export interface AdditionalDetailsOrderRelations {
   // describe navigational properties here
 }
 
-export type AdditionalDetailsOrderWithRelations = AdditionalDetailsOrder & AdditionalDetailsOrderRelations;
+export type AdditionalDetailsOrderWithRelations = AdditionalDetailsOrder &
+  AdditionalDetailsOrderRelations;
