@@ -59,3 +59,5 @@ export * from './product-tax-group-product.controller';
 export * from './product-category-product.controller';
 export * from './product-price-book-account.controller';
 export * from './custom-payment-product.controller';
+export * from './account.controller';
+export * from './permission-preferences.controller';
