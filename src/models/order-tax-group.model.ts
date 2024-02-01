@@ -5,8 +5,15 @@ export class OrderTaxGroup extends Entity {
   @property({
     type: 'string',
     id: true,
+    generated: true
   })
-  orderId?: string;
+  id?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  orderId: string;
 
   @property({
     type: 'string',
