@@ -10,10 +10,10 @@ export class Addon extends Entity {
   addonId?: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  name: number;
+  name: string;
 
   @property({
     type: 'number',
