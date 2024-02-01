@@ -5,15 +5,15 @@ import {
   model,
   property,
 } from '@loopback/repository';
+import {AccountPaymentGateway} from './account-payment-gateway.model';
 import {Address} from './address.model';
 import {Crm} from './crm.model';
 import {Device} from './device.model';
+import {OrderTicketGroup} from './order-ticket-group.model';
+import {PaymentGateway} from './payment-gateway.model';
+import {ProductPriceBook} from './product-price-book.model';
 import {Register} from './register.model';
 import {User} from './user.model';
-import {PaymentGateway} from './payment-gateway.model';
-import {AccountPaymentGateway} from './account-payment-gateway.model';
-import {ProductPriceBook} from './product-price-book.model';
-import {OrderTicketGroup} from './order-ticket-group.model';
 
 @model()
 export class Account extends Entity {
@@ -85,7 +85,9 @@ export class Account extends Entity {
   @hasMany(() => Crm, {keyTo: 'crmId'})
   crms: Crm[];
 
-  @hasMany(() => PaymentGateway, {through: {model: () => AccountPaymentGateway, keyTo: 'gatewayId'}})
+  @hasMany(() => PaymentGateway, {
+    through: {model: () => AccountPaymentGateway, keyTo: 'gatewayId'},
+  })
   accountPaymentGateway: PaymentGateway[];
 
   @hasMany(() => ProductPriceBook)

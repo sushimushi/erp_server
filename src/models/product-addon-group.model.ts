@@ -1,12 +1,17 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Entity, belongsTo, model, property} from '@loopback/repository';
+import {AddonGroup} from './addon-group.model';
 import {Product} from './product.model';
 
 @model()
 export class ProductAddonGroup extends Entity {
   @property({
     type: 'string',
+    id: true,
     required: true,
   })
+  id: string;
+
+  @belongsTo(() => AddonGroup)
   addonGroupId: string;
 
   @belongsTo(() => Product)
@@ -21,4 +26,5 @@ export interface ProductAddonGroupRelations {
   // describe navigational properties here
 }
 
-export type ProductAddonGroupWithRelations = ProductAddonGroup & ProductAddonGroupRelations;
+export type ProductAddonGroupWithRelations = ProductAddonGroup &
+  ProductAddonGroupRelations;

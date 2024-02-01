@@ -1,9 +1,22 @@
-import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
-import {Variant} from './variant.model';
+import {
+  Entity,
+  belongsTo,
+  hasMany,
+  model,
+  property,
+} from '@loopback/repository';
 import {Product} from './product.model';
+import {Variant} from './variant.model';
 
 @model()
 export class ProductVariant extends Entity {
+  @property({
+    type: 'string',
+    id: true,
+    generated: true,
+  })
+  productVariantId: string;
+
   @property({
     type: 'string',
     required: true,
@@ -39,4 +52,5 @@ export interface ProductVariantRelations {
   // describe navigational properties here
 }
 
-export type ProductVariantWithRelations = ProductVariant & ProductVariantRelations;
+export type ProductVariantWithRelations = ProductVariant &
+  ProductVariantRelations;

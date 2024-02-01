@@ -9,6 +9,8 @@ const config = {
   user: 'theGenie',
   password: 'theGenie',
   database: 'theGenie',
+  debug: true, // Enable query debugging
+  logging: true, // Enable SQL query logging
 };
 
 // Observe application's life cycle to disconnect the datasource when

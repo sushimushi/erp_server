@@ -6,20 +6,20 @@ export class AdditionalDetailsOrder extends Entity {
     type: 'string',
     required: true,
   })
-  additionalDetails: string;
+  additionalDetailId?: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  orderId: string;
+  orderId?: string;
 
   @property({
     type: 'string',
     id: true,
     generated: true,
   })
-  id?: string;
+  additionalDetailsOrderId?: string;
 
   // Define well-known properties here
 

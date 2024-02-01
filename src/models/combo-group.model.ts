@@ -4,7 +4,8 @@ import {Entity, model, property} from '@loopback/repository';
 export class ComboGroup extends Entity {
   @property({
     type: 'string',
-    required: true,
+    id: true,
+    generated: true,
   })
   comboGroupId: string;
 
@@ -31,7 +32,6 @@ export class ComboGroup extends Entity {
     required: true,
   })
   priceExcludingDiscountTax: number;
-
 
   constructor(data?: Partial<ComboGroup>) {
     super(data);

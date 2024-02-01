@@ -35,14 +35,14 @@ export class AdditionalDetails extends Entity {
   })
   fieldType?: string[];
 
-  @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
-  additionalDetailsOrder: Order[];
+  // @hasMany(() => Order, { through: { model: () => AdditionalDetailsOrder } })
+  // additionalDetailsOrder: Order[];
 
-  @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
-  orders: Order[];
+  // @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
+  // orders: Order[];
 
-  @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
-  ordersAdditionalDetails: Order[];
+  // @hasMany(() => Order, {through: {model: () => AdditionalDetailsOrder}})
+  // ordersAdditionalDetails: Order[];
 
   constructor(data?: Partial<AdditionalDetails>) {
     super(data);

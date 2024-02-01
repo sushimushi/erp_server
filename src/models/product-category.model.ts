@@ -1,12 +1,18 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Product} from './product.model';
+import {Category} from './category.model';
 
 @model()
 export class ProductCategory extends Entity {
+
   @property({
     type: 'string',
-    required: true,
+    id: true,
+    generated: true
   })
+  id: string;
+
+  @belongsTo(()=> Category)
   categoryId: string;
 
   @belongsTo(() => Product)
