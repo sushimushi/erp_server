@@ -2,9 +2,17 @@ import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class AccountPaymentGateway extends Entity {
+
   @property({
     type: 'string',
     id: true,
+    generated: true,
+  })
+  accountPaymentGatewayId?: string;
+
+  @property({
+    type: 'string',
+    required: true,
   })
   accountId?: string;
 
@@ -12,7 +20,7 @@ export class AccountPaymentGateway extends Entity {
     type: 'string',
     required: true,
   })
-  gatewayId: string;
+  gatewayId?: string;
 
 
   constructor(data?: Partial<AccountPaymentGateway>) {
