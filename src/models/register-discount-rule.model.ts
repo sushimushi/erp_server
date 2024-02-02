@@ -5,8 +5,15 @@ export class RegisterDiscountRule extends Entity {
   @property({
     type: 'string',
     id: true,
+    generated: true
   })
-  registerId?: string;
+  id?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  registerId: string;
 
   @property({
     type: 'string',
