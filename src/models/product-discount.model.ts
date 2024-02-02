@@ -5,6 +5,13 @@ export class ProductDiscount extends Entity {
   @property({
     type: 'string',
     id: true,
+    generated: true
+  })
+  id?: string;
+
+  @property({
+    type: 'string',
+    required: true,
   })
   productId?: string;
 
