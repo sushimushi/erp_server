@@ -5,8 +5,15 @@ export class TaxGroupTax extends Entity {
   @property({
     type: 'string',
     id: true,
+    generated: true
   })
-  taxGroupId?: string;
+  id?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  taxGroupId: string;
 
   @property({
     type: 'string',
