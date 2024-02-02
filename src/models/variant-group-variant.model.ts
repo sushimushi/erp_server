@@ -5,8 +5,15 @@ export class VariantGroupVariant extends Entity {
   @property({
     type: 'string',
     id: true,
+    generated: true
   })
-  variantGroupId?: string;
+  id?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  variantGroupId: string;
 
   @property({
     type: 'string',
