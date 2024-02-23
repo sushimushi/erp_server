@@ -96,3 +96,4 @@ export * from './variant-group.controller';
 export * from './variant.controller';
 export * from './webhook-table-order.controller';
 export * from './webhook-table.controller';
+export * from './admin.controller';

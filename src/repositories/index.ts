@@ -58,3 +58,4 @@ export * from './product-custom-payment.repository';
 export * from './discount-rule-discount.repository';
 export * from './additional-details-order.repository';
 export * from './product-additional-details.repository';
+export * from './admin.repository';

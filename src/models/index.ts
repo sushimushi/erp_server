@@ -58,3 +58,4 @@ export * from './discount-rule-discount.model';
 export * from './additional-details-order.model';
 export * from './product-additional-details.model';
 export * from './printer.model';
+export * from './admin.model';

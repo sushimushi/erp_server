@@ -10,6 +10,13 @@ import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
 
+import { AuthenticationComponent } from "@loopback/authentication"
+import {
+  JWTAuthenticationComponent,
+  UserServiceBindings,
+} from "@loopback/authentication-jwt"
+import { PostgresDataSource } from "./datasources"
+
 export {ApplicationConfig};
 
 export class PosApplication extends BootMixin(
@@ -40,5 +47,9 @@ export class PosApplication extends BootMixin(
         nested: true,
       },
     };
+
+    this.component(AuthenticationComponent)
+    this.component(JWTAuthenticationComponent)
+    this.dataSource(PostgresDataSource, UserServiceBindings.DATASOURCE_NAME)
   }
 }
