@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -45,6 +46,7 @@ export class ProductProductPriceBookController {
     return this.productRepository.productPriceBooks(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/products/{id}/product-price-books', {
     responses: {
       '200': {

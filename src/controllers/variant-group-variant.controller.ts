@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -5,7 +6,7 @@ import {
   repository,
   Where,
 } from '@loopback/repository';
-  import {
+import {
   del,
   get,
   getModelSchemaRef,
@@ -16,9 +17,8 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-VariantGroup,
-VariantGroupVariant,
-Variant,
+  Variant,
+  VariantGroup
 } from '../models';
 import {VariantGroupRepository} from '../repositories';
 
@@ -46,6 +46,7 @@ export class VariantGroupVariantController {
     return this.variantGroupRepository.variants(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/variant-groups/{id}/variants', {
     responses: {
       '200': {

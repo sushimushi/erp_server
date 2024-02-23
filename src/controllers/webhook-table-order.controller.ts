@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -16,8 +17,8 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-  WebhookTable,
   Order,
+  WebhookTable,
 } from '../models';
 import {WebhookTableRepository} from '../repositories';
 
@@ -45,6 +46,7 @@ export class WebhookTableOrderController {
     return this.webhookTableRepository.orders(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/webhook-tables/{id}/orders', {
     responses: {
       '200': {

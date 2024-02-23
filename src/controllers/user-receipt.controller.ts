@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -16,8 +17,8 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-  User,
   Receipt,
+  User,
 } from '../models';
 import {UserRepository} from '../repositories';
 
@@ -45,6 +46,7 @@ export class UserReceiptController {
     return this.userRepository.userReceipt(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/users/{id}/receipts', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -7,13 +8,13 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
@@ -26,6 +27,7 @@ export class RefundController {
     public refundRepository : RefundRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/refunds')
   @response(200, {
     description: 'Refund model instance',

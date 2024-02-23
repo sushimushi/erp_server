@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -7,13 +8,13 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
@@ -26,6 +27,7 @@ export class TaxGroupController {
     public taxGroupRepository : TaxGroupRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/tax-groups')
   @response(200, {
     description: 'TaxGroup model instance',

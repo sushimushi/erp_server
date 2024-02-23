@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -5,7 +6,7 @@ import {
   repository,
   Where,
 } from '@loopback/repository';
-  import {
+import {
   del,
   get,
   getModelSchemaRef,
@@ -16,9 +17,8 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-TaxGroup,
-TaxGroupTax,
-Tax,
+  Tax,
+  TaxGroup
 } from '../models';
 import {TaxGroupRepository} from '../repositories';
 
@@ -46,6 +46,7 @@ export class TaxGroupTaxController {
     return this.taxGroupRepository.taxes(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/tax-groups/{id}/taxes', {
     responses: {
       '200': {

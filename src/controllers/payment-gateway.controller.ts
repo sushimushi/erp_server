@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -7,13 +8,13 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
@@ -26,6 +27,7 @@ export class PaymentGatewayController {
     public paymentGatewayRepository : PaymentGatewayRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/payment-gateways')
   @response(200, {
     description: 'PaymentGateway model instance',
