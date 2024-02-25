@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AccountController {
     public accountRepository : AccountRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/accounts')
   @response(200, {
     description: 'Account model instance',
@@ -47,6 +49,7 @@ export class AccountController {
     return this.accountRepository.create(account);
   }
 
+  @authenticate('jwt')
   @get('/accounts/count')
   @response(200, {
     description: 'Account model count',
@@ -58,6 +61,7 @@ export class AccountController {
     return this.accountRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/accounts')
   @response(200, {
     description: 'Array of Account model instances',
@@ -76,6 +80,7 @@ export class AccountController {
     return this.accountRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/accounts')
   @response(200, {
     description: 'Account PATCH success count',
@@ -95,6 +100,7 @@ export class AccountController {
     return this.accountRepository.updateAll(account, where);
   }
 
+  @authenticate('jwt')
   @get('/accounts/{id}')
   @response(200, {
     description: 'Account model instance',
@@ -111,6 +117,7 @@ export class AccountController {
     return this.accountRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/accounts/{id}')
   @response(204, {
     description: 'Account PATCH success',
@@ -129,6 +136,7 @@ export class AccountController {
     await this.accountRepository.updateById(id, account);
   }
 
+  @authenticate('jwt')
   @put('/accounts/{id}')
   @response(204, {
     description: 'Account PUT success',
@@ -140,6 +148,7 @@ export class AccountController {
     await this.accountRepository.replaceById(id, account);
   }
 
+  @authenticate('jwt')
   @del('/accounts/{id}')
   @response(204, {
     description: 'Account DELETE success',

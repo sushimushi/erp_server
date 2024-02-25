@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class CrmController {
     public crmRepository : CrmRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/crms')
   @response(200, {
     description: 'Crm model instance',
@@ -47,6 +49,7 @@ export class CrmController {
     return this.crmRepository.create(crm);
   }
 
+  @authenticate('jwt')
   @get('/crms/count')
   @response(200, {
     description: 'Crm model count',
@@ -58,6 +61,7 @@ export class CrmController {
     return this.crmRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/crms')
   @response(200, {
     description: 'Array of Crm model instances',
@@ -76,6 +80,7 @@ export class CrmController {
     return this.crmRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/crms')
   @response(200, {
     description: 'Crm PATCH success count',
@@ -95,6 +100,7 @@ export class CrmController {
     return this.crmRepository.updateAll(crm, where);
   }
 
+  @authenticate('jwt')
   @get('/crms/{id}')
   @response(200, {
     description: 'Crm model instance',
@@ -111,6 +117,7 @@ export class CrmController {
     return this.crmRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/crms/{id}')
   @response(204, {
     description: 'Crm PATCH success',
@@ -129,6 +136,7 @@ export class CrmController {
     await this.crmRepository.updateById(id, crm);
   }
 
+  @authenticate('jwt')
   @put('/crms/{id}')
   @response(204, {
     description: 'Crm PUT success',
@@ -140,6 +148,7 @@ export class CrmController {
     await this.crmRepository.replaceById(id, crm);
   }
 
+  @authenticate('jwt')
   @del('/crms/{id}')
   @response(204, {
     description: 'Crm DELETE success',

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class OrderFulfillmentController {
     @repository(OrderRepository) protected orderRepository: OrderRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/orders/{id}/fulfillment', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class OrderFulfillmentController {
     return this.orderRepository.fulfillment(id).get(filter);
   }
 
+  @authenticate('jwt')
   @post('/orders/{id}/fulfillment', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class OrderFulfillmentController {
     return this.orderRepository.fulfillment(id).create(fulfillment);
   }
 
+  @authenticate('jwt')
   @patch('/orders/{id}/fulfillment', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class OrderFulfillmentController {
     return this.orderRepository.fulfillment(id).patch(fulfillment, where);
   }
 
+  @authenticate('jwt')
   @del('/orders/{id}/fulfillment', {
     responses: {
       '200': {

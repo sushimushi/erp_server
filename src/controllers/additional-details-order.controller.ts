@@ -3,6 +3,7 @@
 //     @repository(AdditionalDetailsRepository) protected additionalDetailsRepository: AdditionalDetailsRepository,
 //   ) { }
 
+//   @authenticate('jwt')
 //   @get('/additional-details/{id}/orders', {
 //     responses: {
 //       '200': {
@@ -22,6 +23,7 @@
 //     return this.additionalDetailsRepository.additionalDetailsOrder(id).find(filter);
 //   }
 
+//   @authenticate('jwt')
 //   @post('/additional-details/{id}/orders', {
 //     responses: {
 //       '200': {
@@ -46,6 +48,7 @@
 //     return this.additionalDetailsRepository.additionalDetailsOrder(id).create(order);
 //   }
 
+//   @authenticate('jwt')
 //   @patch('/additional-details/{id}/orders', {
 //     responses: {
 //       '200': {
@@ -69,6 +72,7 @@
 //     return this.additionalDetailsRepository.additionalDetailsOrder(id).patch(order, where);
 //   }
 
+//   @authenticate('jwt')
 //   @del('/additional-details/{id}/orders', {
 //     responses: {
 //       '200': {

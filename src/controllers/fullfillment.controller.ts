@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class FullfillmentController {
     public fulfillmentRepository : FulfillmentRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/fulfillments')
   @response(200, {
     description: 'Fulfillment model instance',
@@ -47,6 +49,7 @@ export class FullfillmentController {
     return this.fulfillmentRepository.create(fulfillment);
   }
 
+  @authenticate('jwt')
   @get('/fulfillments/count')
   @response(200, {
     description: 'Fulfillment model count',
@@ -58,6 +61,7 @@ export class FullfillmentController {
     return this.fulfillmentRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/fulfillments')
   @response(200, {
     description: 'Array of Fulfillment model instances',
@@ -76,6 +80,7 @@ export class FullfillmentController {
     return this.fulfillmentRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/fulfillments')
   @response(200, {
     description: 'Fulfillment PATCH success count',
@@ -95,6 +100,7 @@ export class FullfillmentController {
     return this.fulfillmentRepository.updateAll(fulfillment, where);
   }
 
+  @authenticate('jwt')
   @get('/fulfillments/{id}')
   @response(200, {
     description: 'Fulfillment model instance',
@@ -111,6 +117,7 @@ export class FullfillmentController {
     return this.fulfillmentRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/fulfillments/{id}')
   @response(204, {
     description: 'Fulfillment PATCH success',
@@ -129,6 +136,7 @@ export class FullfillmentController {
     await this.fulfillmentRepository.updateById(id, fulfillment);
   }
 
+  @authenticate('jwt')
   @put('/fulfillments/{id}')
   @response(204, {
     description: 'Fulfillment PUT success',
@@ -140,6 +148,7 @@ export class FullfillmentController {
     await this.fulfillmentRepository.replaceById(id, fulfillment);
   }
 
+  @authenticate('jwt')
   @del('/fulfillments/{id}')
   @response(204, {
     description: 'Fulfillment DELETE success',

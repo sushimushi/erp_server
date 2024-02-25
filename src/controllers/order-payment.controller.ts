@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class OrderPaymentController {
     @repository(OrderRepository) protected orderRepository: OrderRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/orders/{id}/payments', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class OrderPaymentController {
     return this.orderRepository.orderPayment(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/orders/{id}/payments', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class OrderPaymentController {
     return this.orderRepository.orderPayment(id).create(payment);
   }
 
+  @authenticate('jwt')
   @patch('/orders/{id}/payments', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class OrderPaymentController {
     return this.orderRepository.orderPayment(id).patch(payment, where);
   }
 
+  @authenticate('jwt')
   @del('/orders/{id}/payments', {
     responses: {
       '200': {

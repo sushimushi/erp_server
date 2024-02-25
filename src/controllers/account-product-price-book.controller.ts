@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AccountProductPriceBookController {
     @repository(AccountRepository) protected accountRepository: AccountRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/accounts/{id}/product-price-books', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class AccountProductPriceBookController {
     return this.accountRepository.productPriceBooks(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/accounts/{id}/product-price-books', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class AccountProductPriceBookController {
     return this.accountRepository.productPriceBooks(id).create(productPriceBook);
   }
 
+  @authenticate('jwt')
   @patch('/accounts/{id}/product-price-books', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class AccountProductPriceBookController {
     return this.accountRepository.productPriceBooks(id).patch(productPriceBook, where);
   }
 
+  @authenticate('jwt')
   @del('/accounts/{id}/product-price-books', {
     responses: {
       '200': {

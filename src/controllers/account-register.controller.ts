@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   repository,
 } from '@loopback/repository';
@@ -18,6 +19,7 @@ export class AccountRegisterController {
     public accountRepository: AccountRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/accounts/{id}/register', {
     responses: {
       '200': {

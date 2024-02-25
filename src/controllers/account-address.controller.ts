@@ -11,6 +11,7 @@ import {
   Address,
 } from '../models';
 import {AccountRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
 export class AccountAddressController {
   constructor(
@@ -18,6 +19,7 @@ export class AccountAddressController {
     public accountRepository: AccountRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/accounts/{id}/address', {
     responses: {
       '200': {

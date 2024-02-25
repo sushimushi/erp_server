@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AddonController {
     public addonRepository : AddonRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/addons')
   @response(200, {
     description: 'Addon model instance',
@@ -47,6 +49,7 @@ export class AddonController {
     return this.addonRepository.create(addon);
   }
 
+  @authenticate('jwt')
   @get('/addons/count')
   @response(200, {
     description: 'Addon model count',
@@ -58,6 +61,7 @@ export class AddonController {
     return this.addonRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/addons')
   @response(200, {
     description: 'Array of Addon model instances',
@@ -76,6 +80,7 @@ export class AddonController {
     return this.addonRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/addons')
   @response(200, {
     description: 'Addon PATCH success count',
@@ -95,6 +100,7 @@ export class AddonController {
     return this.addonRepository.updateAll(addon, where);
   }
 
+  @authenticate('jwt')
   @get('/addons/{id}')
   @response(200, {
     description: 'Addon model instance',
@@ -111,6 +117,7 @@ export class AddonController {
     return this.addonRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/addons/{id}')
   @response(204, {
     description: 'Addon PATCH success',
@@ -129,6 +136,7 @@ export class AddonController {
     await this.addonRepository.updateById(id, addon);
   }
 
+  @authenticate('jwt')
   @put('/addons/{id}')
   @response(204, {
     description: 'Addon PUT success',
@@ -140,6 +148,7 @@ export class AddonController {
     await this.addonRepository.replaceById(id, addon);
   }
 
+  @authenticate('jwt')
   @del('/addons/{id}')
   @response(204, {
     description: 'Addon DELETE success',

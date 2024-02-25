@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class ChannelOrderController {
     @repository(ChannelRepository) protected channelRepository: ChannelRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/channels/{id}/orders', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class ChannelOrderController {
     return this.channelRepository.orders(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/channels/{id}/orders', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class ChannelOrderController {
     return this.channelRepository.orders(id).create(order);
   }
 
+  @authenticate('jwt')
   @patch('/channels/{id}/orders', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class ChannelOrderController {
     return this.channelRepository.orders(id).patch(order, where);
   }
 
+  @authenticate('jwt')
   @del('/channels/{id}/orders', {
     responses: {
       '200': {

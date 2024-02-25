@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,7 +18,7 @@ import {
 } from '@loopback/rest';
 import {
 Order,
-OrderDiscount,
+// OrderDiscount,
 Discount,
 } from '../models';
 import {OrderRepository} from '../repositories';
@@ -27,6 +28,7 @@ export class OrderDiscountController {
     @repository(OrderRepository) protected orderRepository: OrderRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/orders/{id}/discounts', {
     responses: {
       '200': {
@@ -46,6 +48,7 @@ export class OrderDiscountController {
     return this.orderRepository.orderDiscount(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/orders/{id}/discounts', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class OrderDiscountController {
     return this.orderRepository.orderDiscount(id).create(discount);
   }
 
+  @authenticate('jwt')
   @patch('/orders/{id}/discounts', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class OrderDiscountController {
     return this.orderRepository.orderDiscount(id).patch(discount, where);
   }
 
+  @authenticate('jwt')
   @del('/orders/{id}/discounts', {
     responses: {
       '200': {

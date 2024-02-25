@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,7 +18,7 @@ import {
 } from '@loopback/rest';
 import {
 CustomPayment,
-ProductCustomPayment,
+// ProductCustomPayment,
 Product,
 } from '../models';
 import {CustomPaymentRepository} from '../repositories';
@@ -27,6 +28,7 @@ export class CustomPaymentProductController {
     @repository(CustomPaymentRepository) protected customPaymentRepository: CustomPaymentRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/custom-payments/{id}/products', {
     responses: {
       '200': {
@@ -46,6 +48,7 @@ export class CustomPaymentProductController {
     return this.customPaymentRepository.products(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/custom-payments/{id}/products', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class CustomPaymentProductController {
     return this.customPaymentRepository.products(id).create(product);
   }
 
+  @authenticate('jwt')
   @patch('/custom-payments/{id}/products', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class CustomPaymentProductController {
     return this.customPaymentRepository.products(id).patch(product, where);
   }
 
+  @authenticate('jwt')
   @del('/custom-payments/{id}/products', {
     responses: {
       '200': {

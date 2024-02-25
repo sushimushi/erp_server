@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,7 +18,7 @@ import {
 } from '@loopback/rest';
 import {
 Order,
-OrderTaxGroup,
+// OrderTaxGroup,
 TaxGroup,
 } from '../models';
 import {OrderRepository} from '../repositories';
@@ -27,6 +28,7 @@ export class OrderTaxGroupController {
     @repository(OrderRepository) protected orderRepository: OrderRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/orders/{id}/tax-groups', {
     responses: {
       '200': {
@@ -46,6 +48,7 @@ export class OrderTaxGroupController {
     return this.orderRepository.orderTaxGroup(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/orders/{id}/tax-groups', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class OrderTaxGroupController {
     return this.orderRepository.orderTaxGroup(id).create(taxGroup);
   }
 
+  @authenticate('jwt')
   @patch('/orders/{id}/tax-groups', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class OrderTaxGroupController {
     return this.orderRepository.orderTaxGroup(id).patch(taxGroup, where);
   }
 
+  @authenticate('jwt')
   @del('/orders/{id}/tax-groups', {
     responses: {
       '200': {

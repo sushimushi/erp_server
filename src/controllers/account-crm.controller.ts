@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AccountCrmController {
     @repository(AccountRepository) protected accountRepository: AccountRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/accounts/{id}/crms', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class AccountCrmController {
     return this.accountRepository.crms(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/accounts/{id}/crms', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class AccountCrmController {
     return this.accountRepository.crms(id).create(crm);
   }
 
+  @authenticate('jwt')
   @patch('/accounts/{id}/crms', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class AccountCrmController {
     return this.accountRepository.crms(id).patch(crm, where);
   }
 
+  @authenticate('jwt')
   @del('/accounts/{id}/crms', {
     responses: {
       '200': {

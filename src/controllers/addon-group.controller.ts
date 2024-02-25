@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AddonGroupController {
     public addonGroupRepository : AddonGroupRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/addon-groups')
   @response(200, {
     description: 'AddonGroup model instance',
@@ -47,6 +49,7 @@ export class AddonGroupController {
     return this.addonGroupRepository.create(addonGroup);
   }
 
+  @authenticate('jwt')
   @get('/addon-groups/count')
   @response(200, {
     description: 'AddonGroup model count',
@@ -58,6 +61,7 @@ export class AddonGroupController {
     return this.addonGroupRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/addon-groups')
   @response(200, {
     description: 'Array of AddonGroup model instances',
@@ -76,6 +80,7 @@ export class AddonGroupController {
     return this.addonGroupRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/addon-groups')
   @response(200, {
     description: 'AddonGroup PATCH success count',
@@ -95,6 +100,7 @@ export class AddonGroupController {
     return this.addonGroupRepository.updateAll(addonGroup, where);
   }
 
+  @authenticate('jwt')
   @get('/addon-groups/{id}')
   @response(200, {
     description: 'AddonGroup model instance',
@@ -111,6 +117,7 @@ export class AddonGroupController {
     return this.addonGroupRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/addon-groups/{id}')
   @response(204, {
     description: 'AddonGroup PATCH success',
@@ -129,6 +136,7 @@ export class AddonGroupController {
     await this.addonGroupRepository.updateById(id, addonGroup);
   }
 
+  @authenticate('jwt')
   @put('/addon-groups/{id}')
   @response(204, {
     description: 'AddonGroup PUT success',
@@ -140,6 +148,7 @@ export class AddonGroupController {
     await this.addonGroupRepository.replaceById(id, addonGroup);
   }
 
+  @authenticate('jwt')
   @del('/addon-groups/{id}')
   @response(204, {
     description: 'AddonGroup DELETE success',

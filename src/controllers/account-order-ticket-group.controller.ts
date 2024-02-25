@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AccountOrderTicketGroupController {
     @repository(AccountRepository) protected accountRepository: AccountRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/accounts/{id}/order-ticket-groups', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class AccountOrderTicketGroupController {
     return this.accountRepository.orderTicketGroups(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/accounts/{id}/order-ticket-groups', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class AccountOrderTicketGroupController {
     return this.accountRepository.orderTicketGroups(id).create(orderTicketGroup);
   }
 
+  @authenticate('jwt')
   @patch('/accounts/{id}/order-ticket-groups', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class AccountOrderTicketGroupController {
     return this.accountRepository.orderTicketGroups(id).patch(orderTicketGroup, where);
   }
 
+  @authenticate('jwt')
   @del('/accounts/{id}/order-ticket-groups', {
     responses: {
       '200': {

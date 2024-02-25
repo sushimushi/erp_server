@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,7 +18,7 @@ import {
 } from '@loopback/rest';
 import {
 AddonGroup,
-AddonGroupAddon,
+// AddonGroupAddon,
 Addon,
 } from '../models';
 import {AddonGroupRepository} from '../repositories';
@@ -27,6 +28,7 @@ export class AddonGroupAddonController {
     @repository(AddonGroupRepository) protected addonGroupRepository: AddonGroupRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/addon-groups/{id}/addons', {
     responses: {
       '200': {
@@ -46,6 +48,7 @@ export class AddonGroupAddonController {
     return this.addonGroupRepository.addonGroupAddon(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/addon-groups/{id}/addons', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class AddonGroupAddonController {
     return this.addonGroupRepository.addonGroupAddon(id).create(addon);
   }
 
+  @authenticate('jwt')
   @patch('/addon-groups/{id}/addons', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class AddonGroupAddonController {
     return this.addonGroupRepository.addonGroupAddon(id).patch(addon, where);
   }
 
+  @authenticate('jwt')
   @del('/addon-groups/{id}/addons', {
     responses: {
       '200': {

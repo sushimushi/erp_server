@@ -1,4 +1,4 @@
-import {
+import {authenticate} from '@loopback/authentication';import {
   Count,
   CountSchema,
   Filter,
@@ -26,6 +26,7 @@ export class CategoryController {
     public categoryRepository : CategoryRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/categories')
   @response(200, {
     description: 'Category model instance',
@@ -47,6 +48,7 @@ export class CategoryController {
     return this.categoryRepository.create(category);
   }
 
+  @authenticate('jwt')
   @get('/categories/count')
   @response(200, {
     description: 'Category model count',
@@ -58,6 +60,7 @@ export class CategoryController {
     return this.categoryRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/categories')
   @response(200, {
     description: 'Array of Category model instances',
@@ -76,6 +79,7 @@ export class CategoryController {
     return this.categoryRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/categories')
   @response(200, {
     description: 'Category PATCH success count',
@@ -95,6 +99,7 @@ export class CategoryController {
     return this.categoryRepository.updateAll(category, where);
   }
 
+  @authenticate('jwt')
   @get('/categories/{id}')
   @response(200, {
     description: 'Category model instance',
@@ -111,6 +116,7 @@ export class CategoryController {
     return this.categoryRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/categories/{id}')
   @response(204, {
     description: 'Category PATCH success',
@@ -129,6 +135,7 @@ export class CategoryController {
     await this.categoryRepository.updateById(id, category);
   }
 
+  @authenticate('jwt')
   @put('/categories/{id}')
   @response(204, {
     description: 'Category PUT success',
@@ -140,6 +147,7 @@ export class CategoryController {
     await this.categoryRepository.replaceById(id, category);
   }
 
+  @authenticate('jwt')
   @del('/categories/{id}')
   @response(204, {
     description: 'Category DELETE success',

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -25,7 +26,7 @@ export class ChannelController {
     @repository(ChannelRepository)
     public channelRepository : ChannelRepository,
   ) {}
-
+  @authenticate('jwt')
   @post('/channels')
   @response(200, {
     description: 'Channel model instance',
@@ -58,6 +59,7 @@ export class ChannelController {
     return this.channelRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/channels')
   @response(200, {
     description: 'Array of Channel model instances',
@@ -76,6 +78,7 @@ export class ChannelController {
     return this.channelRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/channels')
   @response(200, {
     description: 'Channel PATCH success count',
@@ -95,6 +98,7 @@ export class ChannelController {
     return this.channelRepository.updateAll(channel, where);
   }
 
+  @authenticate('jwt')
   @get('/channels/{id}')
   @response(200, {
     description: 'Channel model instance',
@@ -111,6 +115,7 @@ export class ChannelController {
     return this.channelRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/channels/{id}')
   @response(204, {
     description: 'Channel PATCH success',
@@ -129,6 +134,7 @@ export class ChannelController {
     await this.channelRepository.updateById(id, channel);
   }
 
+  @authenticate('jwt')
   @put('/channels/{id}')
   @response(204, {
     description: 'Channel PUT success',
@@ -140,6 +146,7 @@ export class ChannelController {
     await this.channelRepository.replaceById(id, channel);
   }
 
+  @authenticate('jwt')
   @del('/channels/{id}')
   @response(204, {
     description: 'Channel DELETE success',

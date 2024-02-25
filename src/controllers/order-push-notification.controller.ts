@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class OrderPushNotificationController {
     @repository(OrderRepository) protected orderRepository: OrderRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/orders/{id}/push-notifications', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class OrderPushNotificationController {
     return this.orderRepository.pushNotifications(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/orders/{id}/push-notifications', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class OrderPushNotificationController {
     return this.orderRepository.pushNotifications(id).create(pushNotification);
   }
 
+  @authenticate('jwt')
   @patch('/orders/{id}/push-notifications', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class OrderPushNotificationController {
     return this.orderRepository.pushNotifications(id).patch(pushNotification, where);
   }
 
+  @authenticate('jwt')
   @del('/orders/{id}/push-notifications', {
     responses: {
       '200': {

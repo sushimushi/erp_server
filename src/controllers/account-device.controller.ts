@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AccountDeviceController {
     @repository(AccountRepository) protected accountRepository: AccountRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/accounts/{id}/devices', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class AccountDeviceController {
     return this.accountRepository.accountDevices(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/accounts/{id}/devices', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class AccountDeviceController {
     return this.accountRepository.accountDevices(id).create(device);
   }
 
+  @authenticate('jwt')
   @patch('/accounts/{id}/devices', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class AccountDeviceController {
     return this.accountRepository.accountDevices(id).patch(device, where);
   }
 
+  @authenticate('jwt')
   @del('/accounts/{id}/devices', {
     responses: {
       '200': {

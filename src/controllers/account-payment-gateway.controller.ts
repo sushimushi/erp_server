@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,7 +18,7 @@ import {
 } from '@loopback/rest';
 import {
 Account,
-AccountPaymentGateway,
+// AccountPaymentGateway,
 PaymentGateway,
 } from '../models';
 import {AccountRepository} from '../repositories';
@@ -27,6 +28,7 @@ export class AccountPaymentGatewayController {
     @repository(AccountRepository) protected accountRepository: AccountRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/accounts/{id}/payment-gateways', {
     responses: {
       '200': {
@@ -46,6 +48,7 @@ export class AccountPaymentGatewayController {
     return this.accountRepository.accountPaymentGateway(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/accounts/{id}/payment-gateways', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class AccountPaymentGatewayController {
     return this.accountRepository.accountPaymentGateway(id).create(paymentGateway);
   }
 
+  @authenticate('jwt')
   @patch('/accounts/{id}/payment-gateways', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class AccountPaymentGatewayController {
     return this.accountRepository.accountPaymentGateway(id).patch(paymentGateway, where);
   }
 
+  @authenticate('jwt')
   @del('/accounts/{id}/payment-gateways', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class DiscountController {
     public discountRepository : DiscountRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/discounts')
   @response(200, {
     description: 'Discount model instance',
@@ -47,6 +49,7 @@ export class DiscountController {
     return this.discountRepository.create(discount);
   }
 
+  @authenticate('jwt')
   @get('/discounts/count')
   @response(200, {
     description: 'Discount model count',
@@ -58,6 +61,7 @@ export class DiscountController {
     return this.discountRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/discounts')
   @response(200, {
     description: 'Array of Discount model instances',
@@ -76,6 +80,7 @@ export class DiscountController {
     return this.discountRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/discounts')
   @response(200, {
     description: 'Discount PATCH success count',
@@ -95,6 +100,7 @@ export class DiscountController {
     return this.discountRepository.updateAll(discount, where);
   }
 
+  @authenticate('jwt')
   @get('/discounts/{id}')
   @response(200, {
     description: 'Discount model instance',
@@ -111,6 +117,7 @@ export class DiscountController {
     return this.discountRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/discounts/{id}')
   @response(204, {
     description: 'Discount PATCH success',
@@ -129,6 +136,7 @@ export class DiscountController {
     await this.discountRepository.updateById(id, discount);
   }
 
+  @authenticate('jwt')
   @put('/discounts/{id}')
   @response(204, {
     description: 'Discount PUT success',
@@ -140,6 +148,7 @@ export class DiscountController {
     await this.discountRepository.replaceById(id, discount);
   }
 
+  @authenticate('jwt')
   @del('/discounts/{id}')
   @response(204, {
     description: 'Discount DELETE success',

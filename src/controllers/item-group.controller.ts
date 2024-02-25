@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class ItemGroupController {
     public itemGroupRepository : ItemGroupRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/item-groups')
   @response(200, {
     description: 'ItemGroup model instance',
@@ -47,6 +49,7 @@ export class ItemGroupController {
     return this.itemGroupRepository.create(itemGroup);
   }
 
+  @authenticate('jwt')
   @get('/item-groups/count')
   @response(200, {
     description: 'ItemGroup model count',
@@ -58,6 +61,7 @@ export class ItemGroupController {
     return this.itemGroupRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/item-groups')
   @response(200, {
     description: 'Array of ItemGroup model instances',
@@ -76,6 +80,7 @@ export class ItemGroupController {
     return this.itemGroupRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/item-groups')
   @response(200, {
     description: 'ItemGroup PATCH success count',
@@ -95,6 +100,7 @@ export class ItemGroupController {
     return this.itemGroupRepository.updateAll(itemGroup, where);
   }
 
+  @authenticate('jwt')
   @get('/item-groups/{id}')
   @response(200, {
     description: 'ItemGroup model instance',
@@ -111,6 +117,7 @@ export class ItemGroupController {
     return this.itemGroupRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/item-groups/{id}')
   @response(204, {
     description: 'ItemGroup PATCH success',
@@ -129,6 +136,7 @@ export class ItemGroupController {
     await this.itemGroupRepository.updateById(id, itemGroup);
   }
 
+  @authenticate('jwt')
   @put('/item-groups/{id}')
   @response(204, {
     description: 'ItemGroup PUT success',
@@ -140,6 +148,7 @@ export class ItemGroupController {
     await this.itemGroupRepository.replaceById(id, itemGroup);
   }
 
+  @authenticate('jwt')
   @del('/item-groups/{id}')
   @response(204, {
     description: 'ItemGroup DELETE success',

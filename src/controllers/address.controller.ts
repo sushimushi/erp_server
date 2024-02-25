@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class AddressController {
     public addressRepository : AddressRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/addresses')
   @response(200, {
     description: 'Address model instance',
@@ -47,6 +49,7 @@ export class AddressController {
     return this.addressRepository.create(address);
   }
 
+  @authenticate('jwt')
   @get('/addresses/count')
   @response(200, {
     description: 'Address model count',
@@ -58,6 +61,7 @@ export class AddressController {
     return this.addressRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/addresses')
   @response(200, {
     description: 'Array of Address model instances',
@@ -76,6 +80,7 @@ export class AddressController {
     return this.addressRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/addresses')
   @response(200, {
     description: 'Address PATCH success count',
@@ -95,6 +100,7 @@ export class AddressController {
     return this.addressRepository.updateAll(address, where);
   }
 
+  @authenticate('jwt')
   @get('/addresses/{id}')
   @response(200, {
     description: 'Address model instance',
@@ -111,6 +117,7 @@ export class AddressController {
     return this.addressRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/addresses/{id}')
   @response(204, {
     description: 'Address PATCH success',
@@ -129,6 +136,7 @@ export class AddressController {
     await this.addressRepository.updateById(id, address);
   }
 
+  @authenticate('jwt')
   @put('/addresses/{id}')
   @response(204, {
     description: 'Address PUT success',
@@ -140,6 +148,7 @@ export class AddressController {
     await this.addressRepository.replaceById(id, address);
   }
 
+  @authenticate('jwt')
   @del('/addresses/{id}')
   @response(204, {
     description: 'Address DELETE success',

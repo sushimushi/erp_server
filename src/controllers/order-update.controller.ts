@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class OrderUpdateController {
     public orderUpdateRepository : OrderUpdateRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/order-updates')
   @response(200, {
     description: 'OrderUpdate model instance',
@@ -47,6 +49,7 @@ export class OrderUpdateController {
     return this.orderUpdateRepository.create(orderUpdate);
   }
 
+  @authenticate('jwt')
   @get('/order-updates/count')
   @response(200, {
     description: 'OrderUpdate model count',
@@ -58,6 +61,7 @@ export class OrderUpdateController {
     return this.orderUpdateRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/order-updates')
   @response(200, {
     description: 'Array of OrderUpdate model instances',
@@ -76,6 +80,7 @@ export class OrderUpdateController {
     return this.orderUpdateRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/order-updates')
   @response(200, {
     description: 'OrderUpdate PATCH success count',
@@ -95,6 +100,7 @@ export class OrderUpdateController {
     return this.orderUpdateRepository.updateAll(orderUpdate, where);
   }
 
+  @authenticate('jwt')
   @get('/order-updates/{id}')
   @response(200, {
     description: 'OrderUpdate model instance',
@@ -111,6 +117,7 @@ export class OrderUpdateController {
     return this.orderUpdateRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/order-updates/{id}')
   @response(204, {
     description: 'OrderUpdate PATCH success',
@@ -129,6 +136,7 @@ export class OrderUpdateController {
     await this.orderUpdateRepository.updateById(id, orderUpdate);
   }
 
+  @authenticate('jwt')
   @put('/order-updates/{id}')
   @response(204, {
     description: 'OrderUpdate PUT success',
@@ -140,6 +148,7 @@ export class OrderUpdateController {
     await this.orderUpdateRepository.replaceById(id, orderUpdate);
   }
 
+  @authenticate('jwt')
   @del('/order-updates/{id}')
   @response(204, {
     description: 'OrderUpdate DELETE success',

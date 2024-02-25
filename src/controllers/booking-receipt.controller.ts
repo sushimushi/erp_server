@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   repository,
 } from '@loopback/repository';
@@ -18,6 +19,7 @@ export class BookingReceiptController {
     public bookingRepository: BookingRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/bookings/{id}/receipt', {
     responses: {
       '200': {

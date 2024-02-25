@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class BookingController {
     public bookingRepository : BookingRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/bookings')
   @response(200, {
     description: 'Booking model instance',
@@ -47,6 +49,7 @@ export class BookingController {
     return this.bookingRepository.create(booking);
   }
 
+  @authenticate('jwt')
   @get('/bookings/count')
   @response(200, {
     description: 'Booking model count',
@@ -58,6 +61,7 @@ export class BookingController {
     return this.bookingRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/bookings')
   @response(200, {
     description: 'Array of Booking model instances',
@@ -76,6 +80,7 @@ export class BookingController {
     return this.bookingRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/bookings')
   @response(200, {
     description: 'Booking PATCH success count',
@@ -95,6 +100,7 @@ export class BookingController {
     return this.bookingRepository.updateAll(booking, where);
   }
 
+  @authenticate('jwt')
   @get('/bookings/{id}')
   @response(200, {
     description: 'Booking model instance',
@@ -111,6 +117,7 @@ export class BookingController {
     return this.bookingRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/bookings/{id}')
   @response(204, {
     description: 'Booking PATCH success',
@@ -129,6 +136,7 @@ export class BookingController {
     await this.bookingRepository.updateById(id, booking);
   }
 
+  @authenticate('jwt')
   @put('/bookings/{id}')
   @response(204, {
     description: 'Booking PUT success',
@@ -140,6 +148,7 @@ export class BookingController {
     await this.bookingRepository.replaceById(id, booking);
   }
 
+  @authenticate('jwt')
   @del('/bookings/{id}')
   @response(204, {
     description: 'Booking DELETE success',

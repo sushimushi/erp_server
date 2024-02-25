@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,8 @@ export class AdditionalDetailsController {
     public additionalDetailsRepository : AdditionalDetailsRepository,
   ) {}
 
+  @authenticate('jwt')
+  @authenticate('jwt')
   @post('/additional-details')
   @response(200, {
     description: 'AdditionalDetails model instance',
@@ -47,6 +50,7 @@ export class AdditionalDetailsController {
     return this.additionalDetailsRepository.create(additionalDetails);
   }
 
+  @authenticate('jwt')
   @get('/additional-details/count')
   @response(200, {
     description: 'AdditionalDetails model count',
@@ -58,6 +62,7 @@ export class AdditionalDetailsController {
     return this.additionalDetailsRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/additional-details')
   @response(200, {
     description: 'Array of AdditionalDetails model instances',
@@ -76,6 +81,7 @@ export class AdditionalDetailsController {
     return this.additionalDetailsRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/additional-details')
   @response(200, {
     description: 'AdditionalDetails PATCH success count',
@@ -95,6 +101,7 @@ export class AdditionalDetailsController {
     return this.additionalDetailsRepository.updateAll(additionalDetails, where);
   }
 
+  @authenticate('jwt')
   @get('/additional-details/{id}')
   @response(200, {
     description: 'AdditionalDetails model instance',
@@ -111,6 +118,8 @@ export class AdditionalDetailsController {
     return this.additionalDetailsRepository.findById(id, filter);
   }
 
+
+  @authenticate('jwt')
   @patch('/additional-details/{id}')
   @response(204, {
     description: 'AdditionalDetails PATCH success',
@@ -129,6 +138,7 @@ export class AdditionalDetailsController {
     await this.additionalDetailsRepository.updateById(id, additionalDetails);
   }
 
+  @authenticate('jwt')
   @put('/additional-details/{id}')
   @response(204, {
     description: 'AdditionalDetails PUT success',
@@ -140,6 +150,7 @@ export class AdditionalDetailsController {
     await this.additionalDetailsRepository.replaceById(id, additionalDetails);
   }
 
+  @authenticate('jwt')
   @del('/additional-details/{id}')
   @response(204, {
     description: 'AdditionalDetails DELETE success',

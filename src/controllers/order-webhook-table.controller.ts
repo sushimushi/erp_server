@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class OrderWebhookTableController {
     @repository(OrderRepository) protected orderRepository: OrderRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/orders/{id}/webhook-tables', {
     responses: {
       '200': {
@@ -45,6 +47,7 @@ export class OrderWebhookTableController {
     return this.orderRepository.webhookTables(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/orders/{id}/webhook-tables', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class OrderWebhookTableController {
     return this.orderRepository.webhookTables(id).create(webhookTable);
   }
 
+  @authenticate('jwt')
   @patch('/orders/{id}/webhook-tables', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class OrderWebhookTableController {
     return this.orderRepository.webhookTables(id).patch(webhookTable, where);
   }
 
+  @authenticate('jwt')
   @del('/orders/{id}/webhook-tables', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class OrderController {
     public orderRepository : OrderRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/orders')
   @response(200, {
     description: 'Order model instance',
@@ -47,6 +49,7 @@ export class OrderController {
     return this.orderRepository.create(order);
   }
 
+  @authenticate('jwt')
   @get('/orders/count')
   @response(200, {
     description: 'Order model count',
@@ -58,6 +61,7 @@ export class OrderController {
     return this.orderRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/orders')
   @response(200, {
     description: 'Array of Order model instances',
@@ -76,6 +80,7 @@ export class OrderController {
     return this.orderRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/orders')
   @response(200, {
     description: 'Order PATCH success count',
@@ -95,6 +100,7 @@ export class OrderController {
     return this.orderRepository.updateAll(order, where);
   }
 
+  @authenticate('jwt')
   @get('/orders/{id}')
   @response(200, {
     description: 'Order model instance',
@@ -111,6 +117,7 @@ export class OrderController {
     return this.orderRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/orders/{id}')
   @response(204, {
     description: 'Order PATCH success',
@@ -129,6 +136,7 @@ export class OrderController {
     await this.orderRepository.updateById(id, order);
   }
 
+  @authenticate('jwt')
   @put('/orders/{id}')
   @response(204, {
     description: 'Order PUT success',
@@ -140,6 +148,7 @@ export class OrderController {
     await this.orderRepository.replaceById(id, order);
   }
 
+  @authenticate('jwt')
   @del('/orders/{id}')
   @response(204, {
     description: 'Order DELETE success',

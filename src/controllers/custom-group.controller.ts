@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class CustomGroupController {
     public comboGroupRepository : ComboGroupRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/combo-groups')
   @response(200, {
     description: 'ComboGroup model instance',
@@ -47,6 +49,7 @@ export class CustomGroupController {
     return this.comboGroupRepository.create(comboGroup);
   }
 
+  @authenticate('jwt')
   @get('/combo-groups/count')
   @response(200, {
     description: 'ComboGroup model count',
@@ -58,6 +61,7 @@ export class CustomGroupController {
     return this.comboGroupRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/combo-groups')
   @response(200, {
     description: 'Array of ComboGroup model instances',
@@ -76,6 +80,7 @@ export class CustomGroupController {
     return this.comboGroupRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/combo-groups')
   @response(200, {
     description: 'ComboGroup PATCH success count',
@@ -95,6 +100,7 @@ export class CustomGroupController {
     return this.comboGroupRepository.updateAll(comboGroup, where);
   }
 
+  @authenticate('jwt')
   @get('/combo-groups/{id}')
   @response(200, {
     description: 'ComboGroup model instance',
@@ -111,6 +117,7 @@ export class CustomGroupController {
     return this.comboGroupRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/combo-groups/{id}')
   @response(204, {
     description: 'ComboGroup PATCH success',
@@ -129,6 +136,7 @@ export class CustomGroupController {
     await this.comboGroupRepository.updateById(id, comboGroup);
   }
 
+  @authenticate('jwt')
   @put('/combo-groups/{id}')
   @response(204, {
     description: 'ComboGroup PUT success',
@@ -140,6 +148,7 @@ export class CustomGroupController {
     await this.comboGroupRepository.replaceById(id, comboGroup);
   }
 
+  @authenticate('jwt')
   @del('/combo-groups/{id}')
   @response(204, {
     description: 'ComboGroup DELETE success',

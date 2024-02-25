@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class DiscountRuleController {
     public discountRuleRepository : DiscountRuleRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/discount-rules')
   @response(200, {
     description: 'DiscountRule model instance',
@@ -47,6 +49,7 @@ export class DiscountRuleController {
     return this.discountRuleRepository.create(discountRule);
   }
 
+  @authenticate('jwt')
   @get('/discount-rules/count')
   @response(200, {
     description: 'DiscountRule model count',
@@ -58,6 +61,7 @@ export class DiscountRuleController {
     return this.discountRuleRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/discount-rules')
   @response(200, {
     description: 'Array of DiscountRule model instances',
@@ -76,6 +80,7 @@ export class DiscountRuleController {
     return this.discountRuleRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/discount-rules')
   @response(200, {
     description: 'DiscountRule PATCH success count',
@@ -95,6 +100,7 @@ export class DiscountRuleController {
     return this.discountRuleRepository.updateAll(discountRule, where);
   }
 
+  @authenticate('jwt')
   @get('/discount-rules/{id}')
   @response(200, {
     description: 'DiscountRule model instance',
@@ -111,6 +117,7 @@ export class DiscountRuleController {
     return this.discountRuleRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/discount-rules/{id}')
   @response(204, {
     description: 'DiscountRule PATCH success',

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -17,7 +18,7 @@ import {
 } from '@loopback/rest';
 import {
 DiscountRule,
-DiscountRuleRegister,
+// DiscountRuleRegister,
 Register,
 } from '../models';
 import {DiscountRuleRepository} from '../repositories';
@@ -27,6 +28,7 @@ export class DiscountRuleRegisterController {
     @repository(DiscountRuleRepository) protected discountRuleRepository: DiscountRuleRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/discount-rules/{id}/registers', {
     responses: {
       '200': {
@@ -46,6 +48,7 @@ export class DiscountRuleRegisterController {
     return this.discountRuleRepository.registers(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/discount-rules/{id}/registers', {
     responses: {
       '200': {
@@ -70,6 +73,7 @@ export class DiscountRuleRegisterController {
     return this.discountRuleRepository.registers(id).create(register);
   }
 
+  @authenticate('jwt')
   @patch('/discount-rules/{id}/registers', {
     responses: {
       '200': {
@@ -93,6 +97,7 @@ export class DiscountRuleRegisterController {
     return this.discountRuleRepository.registers(id).patch(register, where);
   }
 
+  @authenticate('jwt')
   @del('/discount-rules/{id}/registers', {
     responses: {
       '200': {

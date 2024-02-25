@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   repository,
 } from '@loopback/repository';
@@ -18,6 +19,7 @@ export class FulfillmentReceiptController {
     public fulfillmentRepository: FulfillmentRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/fulfillments/{id}/receipt', {
     responses: {
       '200': {

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class DevicesController {
     public deviceRepository : DeviceRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/devices')
   @response(200, {
     description: 'Device model instance',
@@ -47,6 +49,7 @@ export class DevicesController {
     return this.deviceRepository.create(device);
   }
 
+  @authenticate('jwt')
   @get('/devices/count')
   @response(200, {
     description: 'Device model count',
@@ -58,6 +61,7 @@ export class DevicesController {
     return this.deviceRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/devices')
   @response(200, {
     description: 'Array of Device model instances',
@@ -76,6 +80,7 @@ export class DevicesController {
     return this.deviceRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/devices')
   @response(200, {
     description: 'Device PATCH success count',
@@ -95,6 +100,7 @@ export class DevicesController {
     return this.deviceRepository.updateAll(device, where);
   }
 
+  @authenticate('jwt')
   @get('/devices/{id}')
   @response(200, {
     description: 'Device model instance',
@@ -111,6 +117,7 @@ export class DevicesController {
     return this.deviceRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/devices/{id}')
   @response(204, {
     description: 'Device PATCH success',
@@ -129,6 +136,7 @@ export class DevicesController {
     await this.deviceRepository.updateById(id, device);
   }
 
+  @authenticate('jwt')
   @put('/devices/{id}')
   @response(204, {
     description: 'Device PUT success',
@@ -140,6 +148,7 @@ export class DevicesController {
     await this.deviceRepository.replaceById(id, device);
   }
 
+  @authenticate('jwt')
   @del('/devices/{id}')
   @response(204, {
     description: 'Device DELETE success',

@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class CustomPaymentController {
     public customPaymentRepository : CustomPaymentRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/custom-payments')
   @response(200, {
     description: 'CustomPayment model instance',
@@ -47,6 +49,7 @@ export class CustomPaymentController {
     return this.customPaymentRepository.create(customPayment);
   }
 
+  @authenticate('jwt')
   @get('/custom-payments/count')
   @response(200, {
     description: 'CustomPayment model count',
@@ -58,6 +61,7 @@ export class CustomPaymentController {
     return this.customPaymentRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/custom-payments')
   @response(200, {
     description: 'Array of CustomPayment model instances',
@@ -76,6 +80,7 @@ export class CustomPaymentController {
     return this.customPaymentRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/custom-payments')
   @response(200, {
     description: 'CustomPayment PATCH success count',
@@ -95,6 +100,7 @@ export class CustomPaymentController {
     return this.customPaymentRepository.updateAll(customPayment, where);
   }
 
+  @authenticate('jwt')
   @get('/custom-payments/{id}')
   @response(200, {
     description: 'CustomPayment model instance',
@@ -111,6 +117,7 @@ export class CustomPaymentController {
     return this.customPaymentRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/custom-payments/{id}')
   @response(204, {
     description: 'CustomPayment PATCH success',
@@ -129,6 +136,7 @@ export class CustomPaymentController {
     await this.customPaymentRepository.updateById(id, customPayment);
   }
 
+  @authenticate('jwt')
   @put('/custom-payments/{id}')
   @response(204, {
     description: 'CustomPayment PUT success',
@@ -140,6 +148,7 @@ export class CustomPaymentController {
     await this.customPaymentRepository.replaceById(id, customPayment);
   }
 
+  @authenticate('jwt')
   @del('/custom-payments/{id}')
   @response(204, {
     description: 'CustomPayment DELETE success',

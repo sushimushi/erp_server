@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -26,6 +27,7 @@ export class CustomerController {
     public customerRepository : CustomerRepository,
   ) {}
 
+  @authenticate('jwt')
   @post('/customers')
   @response(200, {
     description: 'Customer model instance',
@@ -47,6 +49,7 @@ export class CustomerController {
     return this.customerRepository.create(customer);
   }
 
+  @authenticate('jwt')
   @get('/customers/count')
   @response(200, {
     description: 'Customer model count',
@@ -58,6 +61,7 @@ export class CustomerController {
     return this.customerRepository.count(where);
   }
 
+  @authenticate('jwt')
   @get('/customers')
   @response(200, {
     description: 'Array of Customer model instances',
@@ -76,6 +80,7 @@ export class CustomerController {
     return this.customerRepository.find(filter);
   }
 
+  @authenticate('jwt')
   @patch('/customers')
   @response(200, {
     description: 'Customer PATCH success count',
@@ -95,6 +100,7 @@ export class CustomerController {
     return this.customerRepository.updateAll(customer, where);
   }
 
+  @authenticate('jwt')
   @get('/customers/{id}')
   @response(200, {
     description: 'Customer model instance',
@@ -111,6 +117,7 @@ export class CustomerController {
     return this.customerRepository.findById(id, filter);
   }
 
+  @authenticate('jwt')
   @patch('/customers/{id}')
   @response(204, {
     description: 'Customer PATCH success',
@@ -129,6 +136,7 @@ export class CustomerController {
     await this.customerRepository.updateById(id, customer);
   }
 
+  @authenticate('jwt')
   @put('/customers/{id}')
   @response(204, {
     description: 'Customer PUT success',
@@ -140,6 +148,7 @@ export class CustomerController {
     await this.customerRepository.replaceById(id, customer);
   }
 
+  @authenticate('jwt')
   @del('/customers/{id}')
   @response(204, {
     description: 'Customer DELETE success',

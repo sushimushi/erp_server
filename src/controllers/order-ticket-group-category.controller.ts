@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   repository,
 } from '@loopback/repository';
@@ -18,6 +19,7 @@ export class OrderTicketGroupCategoryController {
     public orderTicketGroupRepository: OrderTicketGroupRepository,
   ) { }
 
+  @authenticate('jwt')
   @get('/order-ticket-groups/{id}/category', {
     responses: {
       '200': {
