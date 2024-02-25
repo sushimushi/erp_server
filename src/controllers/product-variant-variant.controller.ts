@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -45,6 +46,7 @@ export class ProductVariantVariantController {
     return this.productVariantRepository.variants(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/product-variants/{id}/variants', {
     responses: {
       '200': {

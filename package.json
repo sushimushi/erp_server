@@ -49,11 +49,14 @@
     "!*/__tests__"
   ],
   "dependencies": {
+    "@loopback/authentication": "^10.1.5",
+    "@loopback/authentication-jwt": "^0.14.5",
     "@loopback/boot": "^6.1.5",
     "@loopback/core": "^5.1.5",
     "@loopback/repository": "^6.1.5",
     "@loopback/rest": "^13.1.5",
     "@loopback/rest-explorer": "^6.1.5",
+    "@loopback/security": "^0.10.5",
     "@loopback/service-proxy": "^6.1.5",
     "loopback-component-passport": "^3.12.0",
     "loopback-connector-postgresql": "^5.5.2",

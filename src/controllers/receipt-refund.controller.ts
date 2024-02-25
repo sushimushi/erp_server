@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -45,6 +46,7 @@ export class ReceiptRefundController {
     return this.receiptRepository.refunds(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/receipts/{id}/refunds', {
     responses: {
       '200': {

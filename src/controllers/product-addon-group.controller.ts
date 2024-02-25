@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -5,7 +6,7 @@ import {
   repository,
   Where,
 } from '@loopback/repository';
-  import {
+import {
   del,
   get,
   getModelSchemaRef,
@@ -16,9 +17,8 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-Product,
-ProductAddonGroup,
-AddonGroup,
+  AddonGroup,
+  Product
 } from '../models';
 import {ProductRepository} from '../repositories';
 
@@ -46,6 +46,7 @@ export class ProductAddonGroupController {
     return this.productRepository.productAddonGroup(id).find(filter);
   }
 
+  @authenticate('jwt')
   @post('/products/{id}/addon-groups', {
     responses: {
       '200': {
