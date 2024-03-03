@@ -21,7 +21,7 @@ import {
 } from '@loopback/rest';
 import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
 import {compare, genSalt, hash} from 'bcryptjs';
-import {Admin, Admin as CreateUser} from '../models';
+import {Account, Admin, Admin as CreateUser} from '../models';
 import {AccountRepository, AdminRepository} from '../repositories';
 
 const AdminSchema: SchemaObject = {
@@ -88,7 +88,7 @@ export class AdminController {
       },
     })
     newUserRequest: CreateUser,
-  ): Promise<Admin> {
+  ): Promise<Account> {
     const password = await hash(newUserRequest.password, await genSalt());
     newUserRequest.password = password;
     const savedUser = await this.adminRepository.create(newUserRequest);
@@ -108,7 +108,8 @@ export class AdminController {
     };
     const savedAccount = await this.accountRepository.create(account);
     // await this.userRepository.userCredentials(savedUser.id).create({password});
-    return savedUser;
+
+    return savedAccount;
   }
 
   @post('/signin', {
