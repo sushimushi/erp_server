@@ -21,7 +21,7 @@ import {
 } from '@loopback/rest';
 import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
 import {compare, genSalt, hash} from 'bcryptjs';
-import {Account, Admin, Admin as CreateUser} from '../models';
+import {Account, Admin as CreateUser} from '../models';
 import {AccountRepository, AdminRepository} from '../repositories';
 
 const AdminSchema: SchemaObject = {
@@ -137,7 +137,6 @@ export class AdminController {
     // const user = await this.userService.verifyCredentials(credentials);
     // const userProfile = this.userService.convertToUserProfile(user);
     // const token = await this.jwtService.generateToken(userProfile);
-    console.log(credentials);
 
     const admin = await this.adminRepository.find({
       where: {
@@ -146,7 +145,14 @@ export class AdminController {
     });
 
     // If user not found, or if password doesn't match, throw an error
-    if (!admin || (admin && !(await compare(credentials.password, admin[0].password)))) {
+    if (admin.length === 0) {
+      throw new Error('Invalid email or password');
+    }
+    // If user not found, or if password doesn't match, throw an error
+    if (
+      admin.length > 0 &&
+      !(await compare(credentials.password, admin[0].password))
+    ) {
       throw new Error('Invalid email or password');
     }
 
@@ -154,11 +160,14 @@ export class AdminController {
       const payload = {
         [securityId]: admin[0].id, // Add any other claims if needed
       };
-      const secretKey = 'your-secret-key'; // Keep the secret key as a string
+      const secretKey = 'my-secret-key'; // Keep the secret key as a string
       const algorithm = 'sha256'; // Choose the algorithm you prefer
       const token = await this.jwtService.generateToken(payload);
-
-      return token;
+      const account = await this.accountRepository.find({
+        where: {userId: admin[0].id},
+      });
+      console.log(admin[0].id, account);
+      return {token: token, account: account};
     }
   }
 
