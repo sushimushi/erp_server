@@ -32,24 +32,24 @@ export class Account extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    required: false,
   })
   mobileNumber: number;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   businessType: string;
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   userName: string;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   businessName: string;
 

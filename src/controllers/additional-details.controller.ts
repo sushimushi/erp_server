@@ -28,7 +28,6 @@ export class AdditionalDetailsController {
   ) {}
 
   @authenticate('jwt')
-  @authenticate('jwt')
   @post('/additional-details')
   @response(200, {
     description: 'AdditionalDetails model instance',

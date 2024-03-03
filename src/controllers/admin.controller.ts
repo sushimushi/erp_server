@@ -21,9 +21,8 @@ import {
 } from '@loopback/rest';
 import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
 import {compare, genSalt, hash} from 'bcryptjs';
-import * as crypto from 'crypto';
 import {Admin, Admin as CreateUser} from '../models';
-import {AdminRepository} from '../repositories';
+import {AccountRepository, AdminRepository} from '../repositories';
 
 const AdminSchema: SchemaObject = {
   type: 'object',
@@ -60,6 +59,8 @@ export class AdminController {
     protected userRepository: UserRepository,
     @repository(AdminRepository)
     protected adminRepository: AdminRepository,
+    @repository(AccountRepository)
+    public accountRepository: AccountRepository,
   ) {}
 
   @post('/signup', {
@@ -92,8 +93,21 @@ export class AdminController {
     newUserRequest.password = password;
     const savedUser = await this.adminRepository.create(newUserRequest);
 
+    const account = {
+      email: newUserRequest.email,
+      mobileNumber: 0,
+      businessType: '',
+      userName: '',
+      businessName: '',
+      inceptionDate: `${new Date()}`,
+      isPaid: false,
+      option: {},
+      businessAddressId: '',
+      userId: savedUser.id,
+      registerId: '',
+    };
+    const savedAccount = await this.accountRepository.create(account);
     // await this.userRepository.userCredentials(savedUser.id).create({password});
-
     return savedUser;
   }
 
@@ -131,7 +145,7 @@ export class AdminController {
     });
 
     // If user not found, or if password doesn't match, throw an error
-    if (!admin || !(await compare(credentials.password, admin[0].password))) {
+    if (!admin || (admin && !(await compare(credentials.password, admin[0].password)))) {
       throw new Error('Invalid email or password');
     }
 
