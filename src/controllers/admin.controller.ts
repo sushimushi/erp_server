@@ -157,17 +157,22 @@ export class AdminController {
     }
 
     if (admin[0].id) {
-      const payload = {
-        [securityId]: admin[0].id, // Add any other claims if needed
-      };
-      const secretKey = 'my-secret-key'; // Keep the secret key as a string
-      const algorithm = 'sha256'; // Choose the algorithm you prefer
-      const token = await this.jwtService.generateToken(payload);
-      const account = await this.accountRepository.find({
-        where: {userId: admin[0].id},
-      });
-      console.log(admin[0].id, account);
-      return {token: token, account: account};
+      try {
+        const payload = {
+          [securityId]: admin[0].id, // Add any other claims if needed
+        };
+      //   const secretKey = 'my-secret-key'; // Keep the secret key as a string
+      // const algorithm = 'sha256'; // Choose the algorithm you prefer
+        const token = await this.jwtService.generateToken(payload);
+        const account = await this.accountRepository.find({
+          where: {userId: admin[0].id},
+        });
+        console.log(admin[0].id, account);
+        return {token: token, account: account};
+      } catch (error) {
+        // Handle exception cases here
+        throw new Error('An error occurred while generating token or fetching account.');
+      }
     }
   }
 
