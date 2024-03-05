@@ -31,10 +31,22 @@ export class Account extends Entity {
   email: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: false,
   })
-  mobileNumber: number;
+  pin: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  city: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  mobileNumber: string;
 
   @property({
     type: 'string',

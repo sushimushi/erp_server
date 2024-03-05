@@ -95,7 +95,7 @@ export class AdminController {
 
     const account = {
       email: newUserRequest.email,
-      mobileNumber: 0,
+      mobileNumber: '',
       businessType: '',
       userName: '',
       businessName: '',
