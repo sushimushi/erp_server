@@ -16,6 +16,17 @@ export class Register extends Entity {
   name: string;
 
   @property({
+    type: 'string',
+  })
+  receiptNumberPrefix: string;
+
+  @property({
+    type: 'boolean',
+  })
+  isPrintReceipt: boolean;
+
+
+  @property({
     type: 'object',
   })
   options?: object;
