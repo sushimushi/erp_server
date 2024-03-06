@@ -21,8 +21,20 @@ import {
 } from '@loopback/rest';
 import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
 import {compare, genSalt, hash} from 'bcryptjs';
-import {Account, Admin as CreateUser} from '../models';
-import {AccountRepository, AdminRepository} from '../repositories';
+import {
+  Account,
+  Admin as CreateUser,
+  PermissionPreferences,
+  PrintingPreferences,
+  SellingPreferences,
+} from '../models';
+import {
+  AccountRepository,
+  AdminRepository,
+  PermissionPreferencesRepository,
+  PrintingPreferencesRepository,
+  SellingPreferencesRepository,
+} from '../repositories';
 
 const AdminSchema: SchemaObject = {
   type: 'object',
@@ -61,6 +73,12 @@ export class AdminController {
     protected adminRepository: AdminRepository,
     @repository(AccountRepository)
     public accountRepository: AccountRepository,
+    @repository(SellingPreferencesRepository)
+    public sellingPreferencesRepository: SellingPreferencesRepository,
+    @repository(PrintingPreferencesRepository)
+    public printingPreferencesRepository: PrintingPreferencesRepository,
+    @repository(PermissionPreferencesRepository)
+    public permissionPreferencesRepository: PermissionPreferencesRepository,
   ) {}
 
   @post('/signup', {
@@ -108,6 +126,49 @@ export class AdminController {
     };
     const savedAccount = await this.accountRepository.create(account);
     // await this.userRepository.userCredentials(savedUser.id).create({password});
+
+    // Create Selling Preferences
+    const sellingPreferences = new SellingPreferences();
+    sellingPreferences.isRoundoffDisabled = false;
+    sellingPreferences.isQuantityModalPromptEnabled = false;
+    sellingPreferences.isOrderTicketEnabled = false;
+    sellingPreferences.isListViewDefault = false;
+    sellingPreferences.isSequentialLrnEnforced = false;
+    sellingPreferences.isQuickBillingEnabled = false;
+    sellingPreferences.isIncomingOrderEnabled = false;
+    sellingPreferences.isQuantityIncreaseDecreaseButtonDisabled = false;
+    sellingPreferences.isAllAndTopCategoryHidden = false;
+    sellingPreferences.isCustomerDataEnforced = false;
+    sellingPreferences.isShiftEnforced = false;
+    sellingPreferences.isAutoKotEnabledForOrders = false;
+    sellingPreferences.accountId = savedAccount.accountId!;
+    const sellingPreferencesCreated =
+      await this.sellingPreferencesRepository.create(sellingPreferences);
+
+    // Create Printing Preferences
+    const printingPreferences = new PrintingPreferences();
+    printingPreferences.isReceiptPrintedBeforePayment = false;
+    printingPreferences.isProductNotesPrintedOnReceipt = false;
+    printingPreferences.isProductTaxRateNotPrintedOnReceipt = false;
+    printingPreferences.isPOSFooterNotPrinted = false;
+    printingPreferences.isDisablePrintCopy = false;
+    printingPreferences.isOrderTicketNumberPrintedOnReceipt = false;
+    printingPreferences.isServerCopyPrinted = false;
+    printingPreferences.isLargerFontKot = false;
+    printingPreferences.isReceiptDetailsPrintedOnKot = false;
+    printingPreferences.isReceiptNotPrintedForOrders = false;
+    printingPreferences.accountId = savedAccount.accountId!;
+    const printingPreferencesCreated =
+      await this.printingPreferencesRepository.create(printingPreferences);
+
+    // Create Permission Preferences
+    const permissionPreferences = new PermissionPreferences();
+    permissionPreferences.isCashierAllowedToOfferDiscount = false;
+    permissionPreferences.isManagerAllowedToEditEmailAddress = false;
+    permissionPreferences.isShiftSummaryHiddenOnLock = false;
+    permissionPreferences.accountId = savedAccount.accountId!;
+    const permissionPreferencesCreated =
+      await this.permissionPreferencesRepository.create(permissionPreferences);
 
     return savedAccount;
   }
@@ -161,17 +222,19 @@ export class AdminController {
         const payload = {
           [securityId]: admin[0].id, // Add any other claims if needed
         };
-      //   const secretKey = 'my-secret-key'; // Keep the secret key as a string
-      // const algorithm = 'sha256'; // Choose the algorithm you prefer
+        //   const secretKey = 'my-secret-key'; // Keep the secret key as a string
+        // const algorithm = 'sha256'; // Choose the algorithm you prefer
         const token = await this.jwtService.generateToken(payload);
         const account = await this.accountRepository.find({
           where: {userId: admin[0].id},
         });
-        console.log(admin[0].id, account);
+
         return {token: token, account: account};
       } catch (error) {
         // Handle exception cases here
-        throw new Error('An error occurred while generating token or fetching account.');
+        throw new Error(
+          'An error occurred while generating token or fetching account.',
+        );
       }
     }
   }
