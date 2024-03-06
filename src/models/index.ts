@@ -60,3 +60,6 @@ export * from './product-additional-details.model';
 export * from './printer.model';
 export * from './admin.model';
 export * from './additional-charge-details.model';
+export * from './custom-petty-cash-categories.model';
+export * from './custom-additional-details.model';
+export * from './custom-tags.model';

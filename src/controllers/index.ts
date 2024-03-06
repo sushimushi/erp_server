@@ -99,3 +99,6 @@ export * from './webhook-table.controller';
 export * from './admin.controller';
 export * from './order-ticket-group.controller';
 export * from './additional-charge-details-controller.controller';
+export * from './custom-petty-cash-categories.controller';
+export * from './custom-additional-details.controller';
+export * from './custom-tags.controller';
