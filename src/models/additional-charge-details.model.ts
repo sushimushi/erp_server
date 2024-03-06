@@ -1,7 +1,7 @@
-import {Model, model, property} from '@loopback/repository';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class AdditionalChargeDetails extends Model {
+export class AdditionalChargeDetails extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -38,6 +38,11 @@ export class AdditionalChargeDetails extends Model {
     type: 'boolean',
   })
   isAutomaticallyAdded?: boolean;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
 
   constructor(data?: Partial<AdditionalChargeDetails>) {
