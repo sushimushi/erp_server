@@ -19,6 +19,11 @@ export class CustomPettyCashCategories extends Entity {
   })
   description?: string;
 
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
 
   constructor(data?: Partial<CustomPettyCashCategories>) {
     super(data);

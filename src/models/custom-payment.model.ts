@@ -1,6 +1,6 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Product} from './product.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {ProductCustomPayment} from './product-custom-payment.model';
+import {Product} from './product.model';
 
 @model()
 export class CustomPayment extends Entity {
@@ -22,6 +22,11 @@ export class CustomPayment extends Entity {
     required: true,
   })
   description: string;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
   @hasMany(() => Product, {through: {model: () => ProductCustomPayment}})
   products: Product[];

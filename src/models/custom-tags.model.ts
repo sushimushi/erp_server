@@ -29,6 +29,11 @@ export class CustomTags extends Entity {
   })
   printThisFieldOnReceipts?: boolean;
 
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
 
   constructor(data?: Partial<CustomTags>) {
     super(data);

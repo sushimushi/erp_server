@@ -24,6 +24,11 @@ export class CustomAdditionalDetails extends Entity {
   })
   printThisFieldOnReceipts?: boolean;
 
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
 
   constructor(data?: Partial<CustomAdditionalDetails>) {
     super(data);
