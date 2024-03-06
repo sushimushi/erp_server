@@ -59,3 +59,4 @@ export * from './additional-details-order.model';
 export * from './product-additional-details.model';
 export * from './printer.model';
 export * from './admin.model';
+export * from './additional-charge-details.model';
