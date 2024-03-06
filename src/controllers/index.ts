@@ -97,3 +97,4 @@ export * from './variant.controller';
 export * from './webhook-table-order.controller';
 export * from './webhook-table.controller';
 export * from './admin.controller';
+export * from './order-ticket-group.controller';

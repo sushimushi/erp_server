@@ -82,7 +82,7 @@ export class SellingPreferences extends Entity {
   isAutoKotEnabledForOrders: boolean;
 
   @belongsTo(() => Account)
-  accountId: string;
+  accountId?: string;
 
   constructor(data?: Partial<SellingPreferences>) {
     super(data);
