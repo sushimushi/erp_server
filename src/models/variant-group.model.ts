@@ -1,6 +1,6 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Variant} from './variant.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {VariantGroupVariant} from './variant-group-variant.model';
+import {Variant} from './variant.model';
 
 @model()
 export class VariantGroup extends Entity {
@@ -29,6 +29,11 @@ export class VariantGroup extends Entity {
     required: true,
   })
   order: number;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
   @hasMany(() => Variant, {through: {model: () => VariantGroupVariant}})
   variants: Variant[];

@@ -26,6 +26,11 @@ export class Addon extends Entity {
   })
   order?: number;
 
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
 
   constructor(data?: Partial<Addon>) {
     super(data);

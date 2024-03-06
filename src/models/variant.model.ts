@@ -29,7 +29,12 @@ export class Variant extends Entity {
   @property({
     type: 'number',
   })
-  order?: number;
+  sortOrder?: number;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
 
   constructor(data?: Partial<Variant>) {

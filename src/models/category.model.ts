@@ -25,6 +25,16 @@ export class Category extends Entity {
   })
   orderTicketGroupId?: string;
 
+  @property({
+    type: 'string',
+  })
+  sortOrder: string;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
 
   constructor(data?: Partial<Category>) {
     super(data);

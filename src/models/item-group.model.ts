@@ -22,6 +22,11 @@ export class ItemGroup extends Entity {
   })
   uniqueItemIds: string[];
 
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
 
   constructor(data?: Partial<ItemGroup>) {
     super(data);

@@ -1,6 +1,6 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Tax} from './tax.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {TaxGroupTax} from './tax-group-tax.model';
+import {Tax} from './tax.model';
 
 @model({settings: {strict: false}})
 export class TaxGroup extends Entity {
@@ -35,6 +35,11 @@ export class TaxGroup extends Entity {
     required: true,
   })
   total: number;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
   @hasMany(() => Tax, {through: {model: () => TaxGroupTax}})
   taxes: Tax[];

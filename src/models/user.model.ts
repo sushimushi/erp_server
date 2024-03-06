@@ -1,6 +1,6 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Order} from './order.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {OrderUpdate} from './order-update.model';
+import {Order} from './order.model';
 import {Receipt} from './receipt.model';
 
 @model()
@@ -35,6 +35,11 @@ export class User extends Entity {
     required: true,
   })
   registerId: string;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
   @hasMany(() => Order, {keyTo: 'cancelledBy'})
   orders: Order[];

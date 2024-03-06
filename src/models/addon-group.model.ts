@@ -1,6 +1,6 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Addon} from './addon.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {AddonGroupAddon} from './addon-group-addon.model';
+import {Addon} from './addon.model';
 
 @model()
 export class AddonGroup extends Entity {
@@ -39,6 +39,11 @@ export class AddonGroup extends Entity {
     type: 'number',
   })
   maxSelectable?: number;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
   @hasMany(() => Addon, {through: {model: () => AddonGroupAddon}})
   addonGroupAddon: Addon[];

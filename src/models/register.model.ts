@@ -55,6 +55,67 @@ export class Register extends Entity {
   })
   paymentGatewayIds: string[];
 
+  @property({
+    type: 'string',
+  })
+  billHeader: string;
+
+  @property({
+    type: 'string',
+  })
+  billFooterContent: string;
+
+  @property({
+    type: 'string',
+  })
+  printerType: string;
+
+  @property({
+    type: 'boolean',
+  })
+  printReceiptsAndOrderTickets: boolean;
+
+  @property({
+    type: 'boolean',
+  })
+  includeShopLogoInPrintedReceipts: boolean;
+
+  @property({
+    type: 'string',
+  })
+  tableNumbers: string;
+
+  @property({
+    type: 'string',
+  })
+  serverIpAddressForWaiter: string;
+
+  @property({
+    type: 'string',
+  })
+  kdsStaleTime: string;
+
+  @property({
+    type: 'boolean',
+  })
+  enableAcceptStatusForOrdersInKds: boolean;
+
+  @property({
+    type: 'boolean',
+  })
+  enableAcceptServedForOrdersInKds: boolean;
+
+  @property({
+    type: 'boolean',
+  })
+  allowToChangeStatusAtItemLevelInKds: boolean;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
+
   constructor(data?: Partial<Register>) {
     super(data);
   }

@@ -19,6 +19,11 @@ export class Tax extends Entity {
   })
   name: string;
 
+  @property({
+    type: 'string',
+  })
+  accountId: string;
+
 
   constructor(data?: Partial<Tax>) {
     super(data);
