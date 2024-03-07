@@ -24,14 +24,16 @@ import {PrintingPreferencesRepository} from '../repositories';
 export class PrintingPreferencesController {
   constructor(
     @repository(PrintingPreferencesRepository)
-    public printingPreferencesRepository : PrintingPreferencesRepository,
+    public printingPreferencesRepository: PrintingPreferencesRepository,
   ) {}
 
   @authenticate('jwt')
   @post('/printing-preferences')
   @response(200, {
     description: 'PrintingPreferences model instance',
-    content: {'application/json': {schema: getModelSchemaRef(PrintingPreferences)}},
+    content: {
+      'application/json': {schema: getModelSchemaRef(PrintingPreferences)},
+    },
   })
   async create(
     @requestBody({
@@ -67,7 +69,9 @@ export class PrintingPreferencesController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(PrintingPreferences, {includeRelations: true}),
+          items: getModelSchemaRef(PrintingPreferences, {
+            includeRelations: true,
+          }),
         },
       },
     },
@@ -94,7 +98,10 @@ export class PrintingPreferencesController {
     printingPreferences: PrintingPreferences,
     @param.where(PrintingPreferences) where?: Where<PrintingPreferences>,
   ): Promise<Count> {
-    return this.printingPreferencesRepository.updateAll(printingPreferences, where);
+    return this.printingPreferencesRepository.updateAll(
+      printingPreferences,
+      where,
+    );
   }
 
   @get('/printing-preferences/{id}')
@@ -102,13 +109,16 @@ export class PrintingPreferencesController {
     description: 'PrintingPreferences model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(PrintingPreferences, {includeRelations: true}),
+        schema: getModelSchemaRef(PrintingPreferences, {
+          includeRelations: true,
+        }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(PrintingPreferences, {exclude: 'where'}) filter?: FilterExcludingWhere<PrintingPreferences>
+    @param.filter(PrintingPreferences, {exclude: 'where'})
+    filter?: FilterExcludingWhere<PrintingPreferences>,
   ): Promise<PrintingPreferences> {
     return this.printingPreferencesRepository.findById(id, filter);
   }
@@ -128,7 +138,10 @@ export class PrintingPreferencesController {
     })
     printingPreferences: PrintingPreferences,
   ): Promise<void> {
-    await this.printingPreferencesRepository.updateById(id, printingPreferences);
+    await this.printingPreferencesRepository.updateById(
+      id,
+      printingPreferences,
+    );
   }
 
   @put('/printing-preferences/{id}')
@@ -139,7 +152,9 @@ export class PrintingPreferencesController {
     @param.path.string('id') id: string,
     @requestBody() printingPreferences: PrintingPreferences,
   ): Promise<void> {
-    await this.printingPreferencesRepository.replaceById(id, printingPreferences);
+    await this.printingPreferencesRepository.updateAll(printingPreferences, {
+      accountId: id,
+    });
   }
 
   @del('/printing-preferences/{id}')

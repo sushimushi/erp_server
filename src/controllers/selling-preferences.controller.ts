@@ -139,7 +139,7 @@ export class SellingPreferencesController {
     @param.path.string('id') id: string,
     @requestBody() sellingPreferences: SellingPreferences,
   ): Promise<void> {
-    await this.sellingPreferencesRepository.replaceById(id, sellingPreferences);
+    await this.sellingPreferencesRepository.updateAll(sellingPreferences, { accountId: id });
   }
 
   @del('/selling-preferences/{id}')

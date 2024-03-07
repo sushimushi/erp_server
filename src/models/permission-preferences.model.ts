@@ -11,19 +11,16 @@ export class PermissionPreferences extends Entity {
   permissionPreferenceId?: string;
   @property({
     type: 'boolean',
-    required: true,
   })
   isCashierAllowedToOfferDiscount: boolean;
 
   @property({
     type: 'boolean',
-    required: true,
   })
   isManagerAllowedToEditEmailAddress: boolean;
 
   @property({
     type: 'boolean',
-    required: true,
   })
   isShiftSummaryHiddenOnLock: boolean;
 
