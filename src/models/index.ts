@@ -63,3 +63,6 @@ export * from './additional-charge-details.model';
 export * from './custom-petty-cash-categories.model';
 export * from './custom-additional-details.model';
 export * from './custom-tags.model';
+export * from './staff.model';
+export * from './custom-field.model';
+export * from './discount-rule-category.model';

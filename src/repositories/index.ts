@@ -63,3 +63,6 @@ export * from './additional-charge-details.repository';
 export * from './custom-petty-cash-categories.repository';
 export * from './custom-additional-details.repository';
 export * from './custom-tags.repository';
+export * from './staff.repository';
+export * from './custom-field.repository';
+export * from './discount-rule-category.repository';

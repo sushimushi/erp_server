@@ -1,8 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Register} from './register.model';
-import {DiscountRuleRegister} from './discount-rule-register.model';
-import {Discount} from './discount.model';
-import {DiscountRuleDiscount} from './discount-rule-discount.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class DiscountRule extends Entity {
@@ -31,16 +27,11 @@ export class DiscountRule extends Entity {
   level?: string;
 
   @property({
-    type: 'array',
-    itemType: 'string',
+    type: 'boolean',
     required: true,
+    default: false,
   })
-  registerIds: string[];
-
-  @property({
-    type: 'object',
-  })
-  visibility?: object;
+  visibility?: boolean;
 
   @property({
     type: 'object',
@@ -49,21 +40,72 @@ export class DiscountRule extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
-  status: string;
+  status?: string;
 
   @property({
     type: 'boolean',
     required: true,
+    default: false,
   })
   isAutomaticallyApplied: boolean;
 
-  @hasMany(() => Register, {through: {model: () => DiscountRuleRegister}})
-  registers: Register[];
+  @property({
+    type: 'string',
+  })
+  startDate: string;
 
-  @hasMany(() => Discount, {through: {model: () => DiscountRuleDiscount}})
-  discounts: Discount[];
+  @property({
+    type: 'string',
+  })
+  endDate: string;
+
+  @property({
+    type: 'string',
+  })
+  hhStart: string;
+
+  @property({
+    type: 'string',
+  })
+  hhEnd: string;
+
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  daysOfWeek: string[];
+
+  @property({
+    type: 'number',
+  })
+  discountAmount: number;
+
+  @property({
+    type: 'number',
+  })
+  minQuantity: number;
+
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  selectedProducts: string[];
+
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  selectedCategories: string[];
+
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  registerIds: string[];
+
+  // @hasMany(() => Discount, {through: {model: () => DiscountRuleDiscount}})
+  // discounts: Discount[];
 
   constructor(data?: Partial<DiscountRule>) {
     super(data);

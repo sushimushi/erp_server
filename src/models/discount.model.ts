@@ -1,6 +1,8 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
 import {DiscountRule} from './discount-rule.model';
 import {DiscountRuleDiscount} from './discount-rule-discount.model';
+import {Category} from './category.model';
+import {DiscountRuleCategory} from './discount-rule-category.model';
 
 @model()
 export class Discount extends Entity {
@@ -36,6 +38,9 @@ export class Discount extends Entity {
 
   @hasMany(() => DiscountRule, {through: {model: () => DiscountRuleDiscount}})
   discountRuleDiscount: DiscountRule[];
+
+  @hasMany(() => Category, {through: {model: () => DiscountRuleCategory}})
+  selectedCategories: Category[];
 
   constructor(data?: Partial<Discount>) {
     super(data);
