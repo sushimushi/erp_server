@@ -23,6 +23,18 @@ export class Order extends Entity {
   orderId?: string;
 
   @property({
+    type: 'string',
+    required: true,
+  })
+  registerId: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  accountId: string;
+
+  @property({
     type: 'object',
   })
   details?: object;
@@ -34,14 +46,13 @@ export class Order extends Entity {
   isRunningOrder: boolean;
 
   @property({
-    type: 'string',
+    type: 'number',
     required: true,
   })
-  tableNumber: string;
+  tableNumber: number;
 
   @property({
     type: 'string',
-    required: true,
   })
   LockType: string;
 
@@ -52,37 +63,31 @@ export class Order extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
   status: string;
 
   @property({
     type: 'string',
-    required: true,
   })
   paymentStatus: string;
 
   @property({
     type: 'string',
-    required: true,
   })
   fullfillmentStatus: string;
 
   @property({
     type: 'string',
-    required: true,
   })
   saleType: string;
 
   @property({
     type: 'string',
-    required: true,
   })
   cancelledBy: string;
 
   @property({
     type: 'date',
-    required: true,
   })
   cancelledAt: string;
 

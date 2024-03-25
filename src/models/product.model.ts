@@ -70,6 +70,7 @@ export class Product extends Entity {
   @property({
     type: 'boolean',
     required: true,
+    default: false
   })
   isCombo: boolean;
 

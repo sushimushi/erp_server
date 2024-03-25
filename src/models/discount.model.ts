@@ -15,8 +15,9 @@ export class Discount extends Entity {
 
   @property({
     type: 'string',
+    required: true,
   })
-  name?: string;
+  couponCode: string;
 
   @property({
     type: 'string',
@@ -25,22 +26,93 @@ export class Discount extends Entity {
   type: string;
 
   @property({
-    type: 'number',
-    required: true,
+    type: 'string',
   })
-  value: number;
+  level?: string;
+
+  @property({
+    type: 'boolean',
+    required: true,
+    default: false,
+  })
+  visibility?: boolean;
+
+  // @property({
+  //   type: 'object',
+  // })
+  // configuration?: object;
+
+  // @property({
+  //   type: 'string',
+  // })
+  // status?: string;
+
+  @property({
+    type: 'boolean',
+    required: true,
+    default: false,
+  })
+  isAutomaticallyApplied: boolean;
+
+  @property({
+    type: 'string',
+  })
+  startDate: string;
+
+  @property({
+    type: 'string',
+  })
+  endDate: string;
+
+  @property({
+    type: 'string',
+  })
+  hhStart: string;
+
+  @property({
+    type: 'string',
+  })
+  hhEnd: string;
+
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  daysOfWeek: string[];
 
   @property({
     type: 'number',
-    required: true,
   })
-  total: number;
+  discountAmount: number;
 
-  @hasMany(() => DiscountRule, {through: {model: () => DiscountRuleDiscount}})
-  discountRuleDiscount: DiscountRule[];
+  @property({
+    type: 'number',
+  })
+  minQuantity: number;
 
-  @hasMany(() => Category, {through: {model: () => DiscountRuleCategory}})
-  selectedCategories: Category[];
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  selectedProducts: string[];
+
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  selectedCategories: string[];
+
+  @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  registerIds: string[];
+
+  // @hasMany(() => DiscountRule, {through: {model: () => DiscountRuleDiscount}})
+  // discountRuleDiscount: DiscountRule[];
+
+  // @hasMany(() => Category, {through: {model: () => DiscountRuleCategory}})
+  // categories: Category[];
 
   constructor(data?: Partial<Discount>) {
     super(data);
