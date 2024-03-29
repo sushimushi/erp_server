@@ -1,21 +1,21 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {TaxGroup} from './tax-group.model';
-import {ProductTaxGroup} from './product-tax-group.model';
-import {Category} from './category.model';
-import {ProductCategory} from './product-category.model';
-import {ProductPriceBook} from './product-price-book.model';
-import {VariantGroup} from './variant-group.model';
-import {ProductVariantGroup} from './product-variant-group.model';
-import {AddonGroup} from './addon-group.model';
-import {ProductAddonGroup} from './product-addon-group.model';
-import {CustomPayment} from './custom-payment.model';
-import {ProductCustomPayment} from './product-custom-payment.model';
-import {OrderItem} from './order-item.model';
-import {ProductOrder} from './product-order.model';
-import {Discount} from './discount.model';
-import {ProductDiscount} from './product-discount.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {AdditionalDetails} from './additional-details.model';
+import {AddonGroup} from './addon-group.model';
+import {Category} from './category.model';
+import {CustomPayment} from './custom-payment.model';
+import {Discount} from './discount.model';
+import {OrderItem} from './order-item.model';
 import {ProductAdditionalDetails} from './product-additional-details.model';
+import {ProductAddonGroup} from './product-addon-group.model';
+import {ProductCategory} from './product-category.model';
+import {ProductCustomPayment} from './product-custom-payment.model';
+import {ProductDiscount} from './product-discount.model';
+import {ProductOrder} from './product-order.model';
+import {ProductPriceBook} from './product-price-book.model';
+import {ProductTaxGroup} from './product-tax-group.model';
+import {ProductVariantGroup} from './product-variant-group.model';
+import {TaxGroup} from './tax-group.model';
+import {VariantGroup} from './variant-group.model';
 
 @model()
 export class Product extends Entity {
@@ -70,7 +70,7 @@ export class Product extends Entity {
   @property({
     type: 'boolean',
     required: true,
-    default: false
+    default: false,
   })
   isCombo: boolean;
 
@@ -78,6 +78,11 @@ export class Product extends Entity {
     type: 'object',
   })
   comboDetails: object;
+
+  @property({
+    type: 'string',
+  })
+  accountId: string;
 
   @hasMany(() => TaxGroup, {through: {model: () => ProductTaxGroup}})
   taxGroups: TaxGroup[];
@@ -103,7 +108,9 @@ export class Product extends Entity {
   @hasMany(() => Discount, {through: {model: () => ProductDiscount}})
   discounts: Discount[];
 
-  @hasMany(() => AdditionalDetails, {through: {model: () => ProductAdditionalDetails}})
+  @hasMany(() => AdditionalDetails, {
+    through: {model: () => ProductAdditionalDetails},
+  })
   additionalDetails: AdditionalDetails[];
 
   constructor(data?: Partial<Product>) {
